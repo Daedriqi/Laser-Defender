@@ -92,4 +92,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603ff9cb145945d418cffc4ef0f971ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: {fileID: 11400000, guid: a20050eff6a8ae54698453e6ed4ff2c4, type: 2}
+  wave: {fileID: 0}
