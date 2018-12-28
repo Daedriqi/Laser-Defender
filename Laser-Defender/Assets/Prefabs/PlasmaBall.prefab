@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4781042505158816421}
   - component: {fileID: 571593986605338306}
   - component: {fileID: 2566586639796167780}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlasmaBall
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
