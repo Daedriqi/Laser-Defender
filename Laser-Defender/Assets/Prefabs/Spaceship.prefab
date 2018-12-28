@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8662119360228639449}
   - component: {fileID: 8662119360228639451}
   - component: {fileID: 8662119360228639445}
+  - component: {fileID: 3521793005054912338}
   m_Layer: 0
   m_Name: Spaceship
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,13 +47,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b74d092e2271242b00e63f24fd6884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipSpeed: 5.5
-  projectileSpeed: 20
-  shootDelay: 0.15
-  leftTurn: {fileID: 21300012, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
-  rightTurn: {fileID: 21300016, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
+  shipSpeed: 2.5
+  playerHealth: 3
+  damageImmunityTime: 1
+  projectileSpeed: 15
+  shootDelay: 0.25
   plasmaBall: {fileID: 4172533160647806503, guid: 18ba986c4bd84ae4c9384b4242c94d25,
     type: 3}
+  leftTurn: {fileID: 21300012, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
+  rightTurn: {fileID: 21300016, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
+  deathExplosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
+    type: 3}
+  hitSound: {fileID: 8300000, guid: 59b9d05e64a9bc348a3ec089846f7fc9, type: 3}
 --- !u!212 &8662119360228639449
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -113,7 +119,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0996aafe35232174a9e3745a5d1d240c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -222,15 +228,36 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.079648495, y: 0.34}
-      - {x: -0.17982435, y: 0.0795549}
-      - {x: -0.35999998, y: -0.16}
-      - {x: -0.36217332, y: -0.23707677}
-      - {x: -0.16616273, y: -0.24898651}
-      - {x: -0.10545993, y: -0.32}
-      - {x: 0.099999994, y: -0.32}
-      - {x: 0.15717626, y: -0.2447569}
-      - {x: 0.35999998, y: -0.22}
-      - {x: 0.3599999, y: -0.15506734}
-      - {x: 0.16393423, y: 0.06398414}
-      - {x: 0.08, y: 0.34}
+    - - {x: -0.09693276, y: 0.2967894}
+      - {x: -0.15389794, y: 0.042105675}
+      - {x: -0.30814716, y: -0.093743324}
+      - {x: -0.31032056, y: -0.21115065}
+      - {x: -0.117190674, y: -0.22017956}
+      - {x: -0.09969851, y: -0.27678967}
+      - {x: 0.0971193, y: -0.27390862}
+      - {x: 0.113965586, y: -0.22171068}
+      - {x: 0.3052666, y: -0.19983482}
+      - {x: 0.30814713, y: -0.094572544}
+      - {x: 0.14088856, y: 0.05534172}
+      - {x: 0.08, y: 0.29678917}
+--- !u!50 &3521793005054912338
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662119360228639448}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

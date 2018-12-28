@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 6306833766407009803}
   - component: {fileID: 2201130751873404202}
   - component: {fileID: 3618721017374336633}
+  - component: {fileID: 6622551311055520852}
+  - component: {fileID: 7830412924541256884}
   m_Layer: 0
   m_Name: Armorbeetle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4543075638559896638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.32, y: 6.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -92,4 +94,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603ff9cb145945d418cffc4ef0f971ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: {fileID: 0}
+  wave: {fileID: 11400000, guid: a20050eff6a8ae54698453e6ed4ff2c4, type: 2}
+  waypoints:
+  - {fileID: 6962543667284403096, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  - {fileID: 8757127584957092024, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  - {fileID: 5938001305007072013, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  - {fileID: 9125376561713107996, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  - {fileID: 568163396696716769, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  - {fileID: 6726908238713646758, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  - {fileID: 8167756717705846848, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  - {fileID: 2803694380631460296, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  - {fileID: 1952880043515477644, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  - {fileID: 493795714902993038, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  - {fileID: 1057983086672010758, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+--- !u!114 &6622551311055520852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543075638559896638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45d2065aac0e2a40b588f74f226b1fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: 3
+  shootRandomRange: 5
+  enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
+    type: 3}
+  projectileSpeed: -2.5
+  explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
+    type: 3}
+  points: 125
+--- !u!58 &7830412924541256884
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543075638559896638}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0032393932, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2811274

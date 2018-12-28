@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 8107834746625952570}
   - component: {fileID: 387414335905316056}
   - component: {fileID: 7372563387838017789}
+  - component: {fileID: 6926757878494682739}
+  - component: {fileID: 1522309470694263892}
   m_Layer: 0
   m_Name: Hyperheat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2567764365211750668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.46, y: 4.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -92,4 +94,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603ff9cb145945d418cffc4ef0f971ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: {fileID: 0}
+  wave: {fileID: 11400000, guid: 5409eb79dd988314191d8fca3c4e512b, type: 2}
+  waypoints:
+  - {fileID: 2269669624713640994, guid: 80492ecc20745cc4c8a468952efa4c67, type: 3}
+  - {fileID: 2269669626374986997, guid: 80492ecc20745cc4c8a468952efa4c67, type: 3}
+  - {fileID: 2269669626409387445, guid: 80492ecc20745cc4c8a468952efa4c67, type: 3}
+  - {fileID: 2269669625917799670, guid: 80492ecc20745cc4c8a468952efa4c67, type: 3}
+  - {fileID: 2269669624326928645, guid: 80492ecc20745cc4c8a468952efa4c67, type: 3}
+  - {fileID: 2269669624886563150, guid: 80492ecc20745cc4c8a468952efa4c67, type: 3}
+--- !u!114 &6926757878494682739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567764365211750668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45d2065aac0e2a40b588f74f226b1fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: 5
+  shootRandomRange: 5
+  enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
+    type: 3}
+  projectileSpeed: -2.5
+  explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
+    type: 3}
+  points: 125
+--- !u!58 &1522309470694263892
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567764365211750668}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.008079171, y: -0.022866905}
+  serializedVersion: 2
+  m_Radius: 0.28200805

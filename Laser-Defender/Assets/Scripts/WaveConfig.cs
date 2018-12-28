@@ -6,9 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Enemy Wave Config")]
 public class WaveConfig : ScriptableObject {
     [SerializeField] GameObject enemyPrefab;
-    [SerializeField] GameObject path;
+    [SerializeField] List<GameObject> paths;
     [SerializeField] float timeBetweenSpawns = 0.5f;
-    [SerializeField] float spawnRandomFactor = 0.5f;
     [SerializeField] float enemySpeed = 2f;
     [SerializeField] int enemyCount = 5;
 
@@ -16,20 +15,20 @@ public class WaveConfig : ScriptableObject {
         return enemyPrefab;
     }
 
-    public List<Transform> GetWaypoints() {
-        List<Transform> points = new List<Transform>();
-        foreach (Transform child in path.transform) {
-            points.Add(child);
+    public List<List<Transform>> GetWaypoints() {
+        List<List<Transform>> points = new List<List<Transform>>();
+        foreach (GameObject path in paths) {
+            List<Transform> tempList = new List<Transform>();
+            foreach (Transform child in path.transform) {
+                tempList.Add(child);
+            }
+            points.Add(tempList);
         }
         return points;
     }
 
     public float GetTimeBetweenSpawns() {
         return timeBetweenSpawns;
-    }
-
-    public float GetSpawnRandomFactor() {
-        return spawnRandomFactor;
     }
 
     public float GetEnemySpeed() {

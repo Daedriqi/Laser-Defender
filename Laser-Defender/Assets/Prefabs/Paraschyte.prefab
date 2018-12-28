@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 5215739118734708698}
   - component: {fileID: 8184116864239186276}
   - component: {fileID: 7331907556455308334}
+  - component: {fileID: 8991962697665390864}
+  - component: {fileID: 7183189889688946151}
   m_Layer: 0
   m_Name: Paraschyte
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876799818383210715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.27, y: 5.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -92,4 +94,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603ff9cb145945d418cffc4ef0f971ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: {fileID: 0}
+  wave: {fileID: 11400000, guid: 3414fd12764b3124b85758cb3d0306b4, type: 2}
+  waypoints:
+  - {fileID: 4640971745542045073, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 4640971746638531967, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 4640971746676072348, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 4640971746307173113, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 4640971746347241414, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 4640971745094482453, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 4640971745344850617, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 4640971745972943985, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 4640971745200717199, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 4640971746252018874, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 4640971744831811538, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+--- !u!114 &8991962697665390864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876799818383210715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45d2065aac0e2a40b588f74f226b1fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: 5
+  shootRandomRange: 5
+  enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
+    type: 3}
+  projectileSpeed: -2.5
+  explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
+    type: 3}
+  points: 125
+--- !u!58 &7183189889688946151
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876799818383210715}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0012303591, y: 0.0015209913}
+  serializedVersion: 2
+  m_Radius: 0.19011486

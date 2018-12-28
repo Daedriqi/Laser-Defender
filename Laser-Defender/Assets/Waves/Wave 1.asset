@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NewBehaviourScript
   enemyPrefab: {fileID: 4543075638559896638, guid: 8477e19047bcd254495a1130519ccd96,
     type: 3}
-  path: {fileID: 3563551495461721868, guid: 80492ecc20745cc4c8a468952efa4c67, type: 3}
-  timeBetweenSpawns: 1.25
-  spawnRandomFactor: 0.5
+  paths:
+  - {fileID: 7954254680876910936, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
+  - {fileID: 1647619237662208035, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
+  timeBetweenSpawns: 1.5
   enemySpeed: 1.75
-  enemyCount: 5
+  enemyCount: 3
