@@ -10,6 +10,7 @@ TagManager:
   - RestartButton
   - GameOverText
   - EnemyBullet
+  - PowerUp
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Enemy
   - PlayerProjectile
   - EnemyProjectile
-  - 
+  - PowerUp
   - 
   - 
   - 

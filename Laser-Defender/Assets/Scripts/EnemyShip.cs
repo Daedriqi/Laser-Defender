@@ -48,11 +48,17 @@ public class EnemyShip : MonoBehaviour {
             currentHitsLeft -= 1;
             Destroy(collision.gameObject);
             if (currentHitsLeft <= 0) {
+                WaveConfig wave = GetComponent<EnemyPathing>().GetPathingWave();
+                GameObject powerUpPrefab = wave.AllEnemiesDestroyed();
+                if (powerUpPrefab != null) {
+                    GameObject powerUp = Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
+                    powerUp.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1f);
+                }
                 int score = game.AddToScore(points);
                 Text[] texts = FindObjectsOfType<Text>();
                 for (int textIndex = 0; textIndex < texts.Length; textIndex++) {
                     if (texts[textIndex].gameObject.tag == "Scoreboard") {
-                        texts[textIndex].text = "Score: " + score;
+                        texts[textIndex].text = score.ToString();
                     }
                 }
                 GameObject explosion = Instantiate(explosionVFX, transform.position, Quaternion.identity);

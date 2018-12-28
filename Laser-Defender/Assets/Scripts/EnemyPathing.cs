@@ -36,6 +36,10 @@ public class EnemyPathing : MonoBehaviour {
         transform.position = waypoints[0].position;
     }
 
+    public WaveConfig GetPathingWave() {
+        return wave;
+    }
+
     private void MoveEnemy() {
         if (waypointsIndex < waypoints.Count) {
             float speedDelta = Time.deltaTime * enemySpeed;

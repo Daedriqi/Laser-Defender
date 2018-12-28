@@ -32,6 +32,7 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     private IEnumerator SpawnAllEnemiesInWave(WaveConfig waveToSpawn) {
+        waveToSpawn.SetCounterZero();
         foreach (List<Transform> path in waveToSpawn.GetWaypoints()) {
             StartCoroutine(SpawnAllEnemiesForPath(path, waveToSpawn));
         }

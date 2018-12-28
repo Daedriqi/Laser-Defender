@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipSpeed: 2.5
-  playerHealth: 3
+  playerHealth: 5
   damageImmunityTime: 1
   projectileSpeed: 15
   shootDelay: 0.25

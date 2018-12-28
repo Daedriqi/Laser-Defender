@@ -15,7 +15,7 @@ public class HUD : MonoBehaviour {
     void Start() {
         player = FindObjectOfType<PlayerShip>();
         nextHealthTickXPos = -2.5f;
-        constantHealthTickYPos = 4.5f;
+        constantHealthTickYPos = 4.75f;
     }
 
     public void FillHealthBar() {

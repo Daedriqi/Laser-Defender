@@ -91,6 +91,21 @@ public class PlayerShip : MonoBehaviour {
             immuneToDamage = true;
             StartCoroutine(DamagePlayer(1));
         }
+        if (collision.gameObject.tag == "PowerUp") {
+            HandlePowerup(collision);
+        }
+    }
+
+    public void AddToHealth() {
+        if (currentHealthLeft < 5) {
+            currentHealthLeft += 1;
+            Hud.HealthGained();
+        }
+    }
+
+    private void HandlePowerup(Collider2D collision) {
+        collision.GetComponent<PowerUp>().GetPowerUpEffect(gameObject);
+        Destroy(collision.gameObject);
     }
 
     private void OnTriggerStay2D(Collider2D collision) {

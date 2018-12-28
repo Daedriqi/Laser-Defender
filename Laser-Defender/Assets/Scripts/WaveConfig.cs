@@ -6,10 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Enemy Wave Config")]
 public class WaveConfig : ScriptableObject {
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] List<GameObject> powerUps;
     [SerializeField] List<GameObject> paths;
     [SerializeField] float timeBetweenSpawns = 0.5f;
     [SerializeField] float enemySpeed = 2f;
     [SerializeField] int enemyCount = 5;
+
+    int enemiesDestroyed = 0;
 
     public GameObject GetEnemyPrefab() {
         return enemyPrefab;
@@ -29,6 +32,19 @@ public class WaveConfig : ScriptableObject {
 
     public float GetTimeBetweenSpawns() {
         return timeBetweenSpawns;
+    }
+
+    public GameObject AllEnemiesDestroyed() {
+        GameObject retVal = null;
+        enemiesDestroyed++;
+        if (enemiesDestroyed == enemyCount * paths.Count) {
+            retVal = powerUps[0];
+        }
+        return retVal;
+    }
+
+    public void SetCounterZero() {
+        enemiesDestroyed = 0;
     }
 
     public float GetEnemySpeed() {
