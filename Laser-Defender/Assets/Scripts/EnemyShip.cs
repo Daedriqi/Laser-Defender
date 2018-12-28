@@ -12,7 +12,7 @@ public class EnemyShip : MonoBehaviour {
     [Header("Projectiles")]
     [SerializeField] float shootRandomRange = 5f;
     [SerializeField] GameObject enemyProjectile;
-    [SerializeField] float projectileSpeed = -15f;
+    [SerializeField] float projectileSpeed = 2.5f;
 
     [Header("Effects")]
     [SerializeField] GameObject explosionVFX;
@@ -34,7 +34,7 @@ public class EnemyShip : MonoBehaviour {
         if (game.GetGameState() == Game.GameState.Playing) {
             Vector3 instantiatePos = new Vector3(transform.position.x, transform.position.y - 0.5f, 0);
             GameObject projectile1 = Instantiate(enemyProjectile, instantiatePos, Quaternion.identity);
-            projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+            projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -projectileSpeed);
         }
     }
 
