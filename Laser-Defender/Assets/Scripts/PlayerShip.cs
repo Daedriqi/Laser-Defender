@@ -86,7 +86,7 @@ public class PlayerShip : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (!immuneToDamage && collision.gameObject.tag == "Enemy") {
+        if (!immuneToDamage && collision.gameObject.tag.Contains("Enemy")) {
             AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
             immuneToDamage = true;
             StartCoroutine(DamagePlayer(1));
