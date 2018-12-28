@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2378843967032590856}
   - component: {fileID: 4781042505158816421}
   - component: {fileID: 571593986605338306}
-  - component: {fileID: 2566586639796167780}
   m_Layer: 10
   m_Name: PlasmaBall
   m_TagString: PlayerBullet
@@ -217,18 +216,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2566586639796167780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4172533160647806503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ed93d01d8a22de40a2b68e5551bb90b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7815884798986791913
 PrefabInstance:
   m_ObjectHideFlags: 0

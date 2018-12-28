@@ -15,9 +15,16 @@ public class PowerUp : MonoBehaviour {
 
     }
 
-    public void GetPowerUpEffect(GameObject player) {
+    public void GetPowerUpEffect(GameObject playerObject) {
+        PlayerShip player = playerObject.GetComponent<PlayerShip>();
         if (type == PowerUpType.ExtraLife) {
-            player.GetComponent<PlayerShip>().AddToHealth();
+            player.AddToHealth();
+        }
+        if (type == PowerUpType.ProjectileQuantityUp) {
+            player.IncreaseBulletQuantity();
+        }
+        if (type == PowerUpType.ProjectileSpeedUp) {
+            player.DecreaseShootDelay();
         }
     }
 
@@ -26,6 +33,7 @@ public class PowerUp : MonoBehaviour {
         ProjectileSpeedUp,
         ProjectileQuantityUp,
         PlasmaProjectile,
-        LaserProjectile
+        LaserProjectile,
+        ShieldBoost
     }
 }

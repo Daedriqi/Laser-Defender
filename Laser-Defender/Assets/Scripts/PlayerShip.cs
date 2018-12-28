@@ -21,17 +21,19 @@ public class PlayerShip : MonoBehaviour {
     [SerializeField] GameObject deathExplosionVFX;
     [SerializeField] AudioClip hitSound;
 
-    List<GameObject> explostions;
-    int currentHealthLeft;
-    bool immuneToDamage = false;
-    HUD Hud;
 
     //cache references
     Game game;
     SpriteRenderer spriteRenderer;
     Sprite defaultSprite;
+    HUD Hud;
 
     //state variables
+    int currentHealthLeft;
+    bool immuneToDamage = false;
+    int defaultNumberOfBullets = 1;
+    int numberOfBullets = 1;
+    float defaultShootDelay;
     float timeBuffer;
     float paddingLeftRight = 0.35f;
     float paddingTop = 4f;
@@ -43,6 +45,7 @@ public class PlayerShip : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        defaultShootDelay = shootDelay;
         Hud = FindObjectOfType<HUD>();
         currentHealthLeft = playerHealth;
         game = FindObjectOfType<Game>();
@@ -73,15 +76,25 @@ public class PlayerShip : MonoBehaviour {
     }
 
     private void Shoot() {
-        if (Input.GetButton("Fire1") && true && Time.time > timeBuffer) {
+        if (Input.GetButton("Fire1") && Time.time > timeBuffer) {
             timeBuffer = Time.time + shootDelay;
-            GameObject projectile1 = Instantiate(plasmaBall, new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
-            projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
-            //shooting in 3 directions at once in a spray
-            //GameObject projectile2 = Instantiate(plasmaBall, transform.position, Quaternion.identity);
-            //projectile2.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed, projectileSpeed);
-            //GameObject projectile3 = Instantiate(plasmaBall, transform.position, Quaternion.identity);
-            //projectile3.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed, projectileSpeed);
+            if (numberOfBullets >= 1) {
+                GameObject projectile1 = Instantiate(plasmaBall, new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+                projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+                projectile1.GetComponent<AudioSource>().Play();
+            }
+            if (numberOfBullets >= 3) {
+                GameObject projectile2 = Instantiate(plasmaBall, transform.position, Quaternion.identity);
+                projectile2.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 6, projectileSpeed);
+                GameObject projectile3 = Instantiate(plasmaBall, transform.position, Quaternion.identity);
+                projectile3.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 6, projectileSpeed);
+            }
+            if (numberOfBullets >= 5) {
+                GameObject projectile4 = Instantiate(plasmaBall, transform.position, Quaternion.identity);
+                projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 3, projectileSpeed);
+                GameObject projectile5 = Instantiate(plasmaBall, transform.position, Quaternion.identity);
+                projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 3, projectileSpeed);
+            }
         }
     }
 
@@ -103,6 +116,18 @@ public class PlayerShip : MonoBehaviour {
         }
     }
 
+    public void IncreaseBulletQuantity() {
+        if (numberOfBullets < 5) {
+            numberOfBullets += 2;
+        }
+    }
+
+    public void DecreaseShootDelay() {
+        if (shootDelay > 0.15f) {
+            shootDelay -= 0.05f;
+        }
+    }
+
     private void HandlePowerup(Collider2D collision) {
         collision.GetComponent<PowerUp>().GetPowerUpEffect(gameObject);
         Destroy(collision.gameObject);
@@ -118,6 +143,12 @@ public class PlayerShip : MonoBehaviour {
 
     public IEnumerator DamagePlayer(int damage) {
         Hud.HealthLost();
+        if (numberOfBullets > defaultNumberOfBullets) {
+            numberOfBullets -= 1;
+        }
+        if (shootDelay < defaultShootDelay) {
+            shootDelay += 0.05f;
+        }
         if (currentHealthLeft - damage <= 0) {
             StopAllCoroutines();
             StartCoroutine(DeathAnimation());

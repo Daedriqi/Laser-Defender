@@ -38,7 +38,9 @@ public class WaveConfig : ScriptableObject {
         GameObject retVal = null;
         enemiesDestroyed++;
         if (enemiesDestroyed == enemyCount * paths.Count) {
-            retVal = powerUps[0];
+            if (powerUps.Count > 0) {
+                retVal = powerUps[0];
+            }
         }
         return retVal;
     }
