@@ -32,8 +32,7 @@ public class PowerUp : MonoBehaviour {
         ExtraLife,
         ProjectileSpeedUp,
         ProjectileQuantityUp,
-        PlasmaProjectile,
-        LaserProjectile,
+        ProjectileSizeUp,
         ShieldBoost
     }
 }

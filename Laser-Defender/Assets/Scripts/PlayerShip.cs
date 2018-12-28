@@ -9,6 +9,7 @@ public class PlayerShip : MonoBehaviour {
     [SerializeField] float shipSpeed = 5f;
     [SerializeField] int playerHealth = 5;
     [SerializeField] float damageImmunityTime = 2f;
+    [SerializeField] GameObject shieldPrefab;
 
     [Header("Projectiles")]
     [SerializeField] float projectileSpeed = 15f;
@@ -27,9 +28,12 @@ public class PlayerShip : MonoBehaviour {
     SpriteRenderer spriteRenderer;
     Sprite defaultSprite;
     HUD Hud;
+    GameObject shield;
 
     //state variables
+    float shieldCapacity = 20;
     int currentHealthLeft;
+    bool shieldUp = false;
     bool immuneToDamage = false;
     int defaultNumberOfBullets = 1;
     int numberOfBullets = 1;
@@ -45,6 +49,7 @@ public class PlayerShip : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        shield = Instantiate(shieldPrefab, new Vector3(-50, -50, 0), Quaternion.identity);
         defaultShootDelay = shootDelay;
         Hud = FindObjectOfType<HUD>();
         currentHealthLeft = playerHealth;
@@ -66,6 +71,7 @@ public class PlayerShip : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (game.GetGameState() == Game.GameState.Playing) {
+            ShieldUp();
             MoveShip();
             Shoot();
         }
@@ -77,11 +83,12 @@ public class PlayerShip : MonoBehaviour {
 
     private void Shoot() {
         if (Input.GetButton("Fire1") && Time.time > timeBuffer) {
+            AudioClip clip = plasmaBall.GetComponent<AudioSource>().clip;
+            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
             timeBuffer = Time.time + shootDelay;
             if (numberOfBullets >= 1) {
                 GameObject projectile1 = Instantiate(plasmaBall, new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
                 projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
-                projectile1.GetComponent<AudioSource>().Play();
             }
             if (numberOfBullets >= 3) {
                 GameObject projectile2 = Instantiate(plasmaBall, transform.position, Quaternion.identity);
@@ -98,8 +105,24 @@ public class PlayerShip : MonoBehaviour {
         }
     }
 
+    private void ShieldUp() {
+        if (Input.GetButton("ShieldUp") && shieldCapacity > 0) {
+            shieldCapacity -= 0.25f;
+            shield.transform.position = transform.position;
+            shieldUp = true;
+            if (shieldCapacity == 0) {
+                shield.transform.position = new Vector3(-50, -50, 0);
+                shieldUp = false;
+            }
+        }
+        if (Input.GetButtonUp("ShieldUp")) {
+            shield.transform.position = new Vector3(-50, -50, 0);
+            shieldUp = false;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (!immuneToDamage && collision.gameObject.tag.Contains("Enemy")) {
+        if (!immuneToDamage && collision.gameObject.tag.Contains("Enemy") && !shieldUp) {
             AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
             immuneToDamage = true;
             StartCoroutine(DamagePlayer(1));
@@ -134,7 +157,7 @@ public class PlayerShip : MonoBehaviour {
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        if (!immuneToDamage && collision.gameObject.tag == "Enemy") {
+        if (!immuneToDamage && collision.gameObject.tag == "Enemy" && !shieldUp) {
             AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
             immuneToDamage = true;
             StartCoroutine(DamagePlayer(1));
