@@ -94,19 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603ff9cb145945d418cffc4ef0f971ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: {fileID: 11400000, guid: 3414fd12764b3124b85758cb3d0306b4, type: 2}
-  waypoints:
-  - {fileID: 4640971745542045073, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
-  - {fileID: 4640971746638531967, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
-  - {fileID: 4640971746676072348, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
-  - {fileID: 4640971746307173113, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
-  - {fileID: 4640971746347241414, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
-  - {fileID: 4640971745094482453, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
-  - {fileID: 4640971745344850617, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
-  - {fileID: 4640971745972943985, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
-  - {fileID: 4640971745200717199, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
-  - {fileID: 4640971746252018874, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
-  - {fileID: 4640971744831811538, guid: 4b43d698259ac1845ad468d928aa42a6, type: 3}
 --- !u!114 &8991962697665390864
 MonoBehaviour:
   m_ObjectHideFlags: 0

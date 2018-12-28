@@ -94,19 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603ff9cb145945d418cffc4ef0f971ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: {fileID: 11400000, guid: a20050eff6a8ae54698453e6ed4ff2c4, type: 2}
-  waypoints:
-  - {fileID: 6962543667284403096, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
-  - {fileID: 8757127584957092024, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
-  - {fileID: 5938001305007072013, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
-  - {fileID: 9125376561713107996, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
-  - {fileID: 568163396696716769, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
-  - {fileID: 6726908238713646758, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
-  - {fileID: 8167756717705846848, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
-  - {fileID: 2803694380631460296, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
-  - {fileID: 1952880043515477644, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
-  - {fileID: 493795714902993038, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
-  - {fileID: 1057983086672010758, guid: 07fe7fedd77284c4a8c8ebcee510384b, type: 3}
 --- !u!114 &6622551311055520852
 MonoBehaviour:
   m_ObjectHideFlags: 0

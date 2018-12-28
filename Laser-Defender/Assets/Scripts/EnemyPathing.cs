@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPathing : MonoBehaviour {
-    [Header("Pathing")]
-    [SerializeField] WaveConfig wave;
-    [SerializeField] List<Transform> waypoints;
-
+    WaveConfig wave;
+    List<Transform> waypoints;
     Game game;
     int waypointsIndex = 0;
     float enemySpeed;
@@ -15,8 +13,6 @@ public class EnemyPathing : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        game = FindObjectOfType<Game>();
-        enemySpeed = wave.GetEnemySpeed();
     }
 
     // Update is called once per frame
@@ -28,7 +24,9 @@ public class EnemyPathing : MonoBehaviour {
 
     public void SetWave(WaveConfig waveToSet) {
         wave = waveToSet;
+        game = FindObjectOfType<Game>();
         enemySpeed = wave.GetEnemySpeed();
+        waypoints = wave.GetWaypoints()[0];
     }
 
     public void SetWaypoints(List<Transform> waypoints) {

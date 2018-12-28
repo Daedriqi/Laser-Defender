@@ -47,10 +47,10 @@ public class EnemySpawner : MonoBehaviour {
     private IEnumerator SpawnAllEnemiesForPath(List<Transform> path, WaveConfig waveToSpawn) {
         int enemiesSpawned = 0;
         while (enemiesSpawned < waveToSpawn.GetEnemyCount()) {
-            GameObject enemy = waveToSpawn.GetEnemyPrefab();
+            GameObject enemyPrefab = waveToSpawn.GetEnemyPrefab();
+            GameObject enemy = Instantiate(enemyPrefab, path[0].position, Quaternion.identity);
             enemy.GetComponent<EnemyPathing>().SetWave(waveToSpawn);
             enemy.GetComponent<EnemyPathing>().SetWaypoints(path);
-            Instantiate(enemy, path[0].position, Quaternion.identity);
             enemiesSpawned++;
             yield return new WaitForSeconds(waveToSpawn.GetTimeBetweenSpawns());
         }
