@@ -13,11 +13,14 @@ public class Game : MonoBehaviour {
     [SerializeField] AudioClip victoryMusic;
     [SerializeField] GameState state = GameState.Playing;
     [SerializeField] GameObject restartButton;
+    [SerializeField] int enemyHealthScaling = 1;
 
     //cache references
     int score;
     Text scoreboard;
     Text gameOverText;
+    int maxHealthScaler = 75;
+    int currentHealthScaling = 0;
 
     //state variables
     AudioSource audioSource;
@@ -65,6 +68,16 @@ public class Game : MonoBehaviour {
         }
     }
 
+    public void RoundComplete() {
+        if (enemyHealthScaling < maxHealthScaler) {
+            currentHealthScaling += enemyHealthScaling;
+        }
+    }
+
+    public int GetHealthScaling() {
+        return currentHealthScaling;
+    }
+
     private void GameOver() {
         GameObject[] everything = FindObjectsOfType<GameObject>();
         foreach (GameObject thing in everything) {
@@ -89,8 +102,12 @@ public class Game : MonoBehaviour {
     }
 
     public void RestartGame() {
+        StopAllCoroutines();
         score = 0;
         SetGameState(GameState.Playing);
+        HealthBarUI healthBarUI = FindObjectOfType<HealthBarUI>();
+        healthBarUI.UpdateHealthBar(300);
+        healthBarUI.UpdateShieldBar(300);
         restartButton.SetActive(false);
         Time.timeScale = 1;
         gameOverText.text = "";

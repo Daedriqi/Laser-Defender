@@ -12,7 +12,6 @@ public class WaveConfig : ScriptableObject {
     [SerializeField] float enemySpeed = 2f;
     [SerializeField] int enemyCount = 5;
 
-    int enemiesDestroyed = 0;
 
     public GameObject GetEnemyPrefab() {
         return enemyPrefab;
@@ -34,19 +33,9 @@ public class WaveConfig : ScriptableObject {
         return timeBetweenSpawns;
     }
 
-    public GameObject AllEnemiesDestroyed() {
-        GameObject retVal = null;
-        enemiesDestroyed++;
-        if (enemiesDestroyed == enemyCount * paths.Count) {
-            if (powerUps.Count > 0) {
-                retVal = powerUps[0];
-            }
-        }
-        return retVal;
-    }
-
-    public void SetCounterZero() {
-        enemiesDestroyed = 0;
+    public GameObject GetPowerUp() {
+        int randomRange = Random.Range(0, 10);
+        return powerUps[randomRange];
     }
 
     public float GetEnemySpeed() {

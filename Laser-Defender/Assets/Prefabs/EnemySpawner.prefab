@@ -47,3 +47,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a20050eff6a8ae54698453e6ed4ff2c4, type: 2}
   - {fileID: 11400000, guid: 5409eb79dd988314191d8fca3c4e512b, type: 2}
   - {fileID: 11400000, guid: 3414fd12764b3124b85758cb3d0306b4, type: 2}
+  waveContainerPrefab: {fileID: 1243202622444823701, guid: 65e4623ce46ece14d882e7a8087a637d,
+    type: 3}

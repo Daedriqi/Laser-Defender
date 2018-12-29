@@ -49,20 +49,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipSpeed: 2.5
-  playerHealth: 5
+  playerHealth: 150
+  shieldCapacity: 150
   damageImmunityTime: 1
   shieldPrefab: {fileID: 5490290133560728547, guid: 41d368147cd2d9e4da8661779515d3f9,
     type: 3}
+  bigBombsCount: 3
   projectileSpeed: 15
-  shootDelay: 0.25
-  plasmaBall: {fileID: 4172533160647806503, guid: 18ba986c4bd84ae4c9384b4242c94d25,
+  shootDelay: 0.3
+  plasmaBalls:
+  - {fileID: 7882473394296666920, guid: 18ba986c4bd84ae4c9384b4242c94d25, type: 3}
+  - {fileID: 1363376297, guid: 672512febf4677d488c432cb52cb1594, type: 3}
+  - {fileID: 6249757304332015422, guid: 97229f9d1eabff4419f5827d7350d5a1, type: 3}
+  - {fileID: 8841613772960843957, guid: 4fbcbec5c8bd0624b9d757fbd8df1339, type: 3}
+  destructor: {fileID: 7628457572313487382, guid: b17b0b86e1bef5541981a68d4eec852b,
     type: 3}
   leftTurn: {fileID: 21300012, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
   rightTurn: {fileID: 21300016, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
   deathExplosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
   hitSound: {fileID: 8300000, guid: 59b9d05e64a9bc348a3ec089846f7fc9, type: 3}
-  shieldCapacity: 10
 --- !u!212 &8662119360228639449
 SpriteRenderer:
   m_ObjectHideFlags: 0

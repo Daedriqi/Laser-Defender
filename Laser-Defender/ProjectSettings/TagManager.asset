@@ -11,6 +11,9 @@ TagManager:
   - GameOverText
   - EnemyBullet
   - PowerUp
+  - HealthBar
+  - ShieldBar
+  - Destructor
   layers:
   - Default
   - TransparentFX

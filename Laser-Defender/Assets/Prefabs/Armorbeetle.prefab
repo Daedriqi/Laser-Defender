@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3618721017374336633}
   - component: {fileID: 6622551311055520852}
   - component: {fileID: 7830412924541256884}
+  - component: {fileID: 8783522860568847664}
   m_Layer: 9
   m_Name: Armorbeetle
   m_TagString: Enemy
@@ -106,9 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45d2065aac0e2a40b588f74f226b1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 2
-  points: 125
-  shootRandomRange: 5
+  enemyHealth: 20
+  points: 135
+  shootRandomRange: 4
   enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
     type: 3}
   projectileSpeed: 5
@@ -130,3 +131,16 @@ CircleCollider2D:
   m_Offset: {x: 0.0032393932, y: 0}
   serializedVersion: 2
   m_Radius: 0.2811274
+--- !u!114 &8783522860568847664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543075638559896638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cb60b2993f9a91488bd65fe80f79604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25

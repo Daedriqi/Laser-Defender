@@ -17,5 +17,8 @@ public class ProjectileTrash : MonoBehaviour {
         if (collider.gameObject.tag.Contains("Bullet")) {
             Destroy(collider.gameObject);
         }
+        if (gameObject.tag != "Player" && collider.gameObject.tag == "Destructor") {
+            Destroy(collider.gameObject);
+        }
     }
 }

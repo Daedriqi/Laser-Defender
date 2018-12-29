@@ -17,24 +17,30 @@ public class EnemyShip : MonoBehaviour {
     [Header("Effects")]
     [SerializeField] GameObject explosionVFX;
 
+    WaveContainer waveContainer;
+    Coroutine shootOnDelay;
     Game game;
     int currentHitsLeft;
     float randomWaitTime;
+    bool dead = false;
+    bool immuneToDamage = true;
 
     // Start is called before the first frame update
     void Start() {
+        waveContainer = transform.parent.GetComponent<WaveContainer>();
         game = FindObjectOfType<Game>();
-        currentHitsLeft = enemyHealth;
-        randomWaitTime = UnityEngine.Random.Range(0.0f, shootRandomRange);
-        StartCoroutine(ShootOnDelay());
+        shootOnDelay = StartCoroutine(ShootOnDelay());
     }
 
     private IEnumerator ShootOnDelay() {
-        yield return new WaitForSeconds(randomWaitTime);
-        if (game.GetGameState() == Game.GameState.Playing) {
-            Vector3 instantiatePos = new Vector3(transform.position.x, transform.position.y - 0.5f, 0);
-            GameObject projectile1 = Instantiate(enemyProjectile, instantiatePos, Quaternion.identity);
-            projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -projectileSpeed);
+        while (true) {
+            randomWaitTime = UnityEngine.Random.Range(0.0f, shootRandomRange);
+            yield return new WaitForSeconds(randomWaitTime);
+            if (game.GetGameState() == Game.GameState.Playing) {
+                Vector3 instantiatePos = new Vector3(transform.position.x, transform.position.y - 0.5f, 0);
+                GameObject projectile1 = Instantiate(enemyProjectile, instantiatePos, Quaternion.identity);
+                projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -projectileSpeed);
+            }
         }
     }
 
@@ -43,18 +49,34 @@ public class EnemyShip : MonoBehaviour {
 
     }
 
+    public void MakeDamagable() {
+        immuneToDamage = false;
+    }
+
+    private void OnDestroy() {
+        StopCoroutine(shootOnDelay);
+    }
+
+    public void SetHealthOnSpawn(int health) {
+        enemyHealth = enemyHealth + health;
+        currentHitsLeft = enemyHealth;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "PlayerBullet") {
-            currentHitsLeft -= 1;
-            Destroy(collision.gameObject);
+        if ((collision.gameObject.tag == "PlayerBullet" || collision.gameObject.tag == "Destructor") && !dead && !immuneToDamage) {
+            DamageDealer damageDealer = collision.GetComponent<DamageDealer>();
+            currentHitsLeft -= damageDealer.GetDamage();
+            if (collision.gameObject.tag != "Destructor") {
+                Destroy(collision.gameObject);
+            }
             if (currentHitsLeft <= 0) {
-                WaveConfig wave = GetComponent<EnemyPathing>().GetPathingWave();
-                GameObject powerUpPrefab = wave.AllEnemiesDestroyed();
-                if (powerUpPrefab != null) {
-                    GameObject powerUp = Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
-                    powerUp.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1f);
-                }
+                dead = true;
                 int score = game.AddToScore(points);
+                this.waveContainer.UpdateEnemiesDestroyed();
+                if (this.waveContainer.SpawnPowerUp()) {
+                    GameObject powerUp = Instantiate(waveContainer.GetWave().GetPowerUp(), transform.position, Quaternion.identity);
+                    powerUp.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
+                }
                 Text[] texts = FindObjectsOfType<Text>();
                 for (int textIndex = 0; textIndex < texts.Length; textIndex++) {
                     if (texts[textIndex].gameObject.tag == "Scoreboard") {
