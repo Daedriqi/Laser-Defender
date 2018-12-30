@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScrollingBackground : MonoBehaviour {
-    [SerializeField] float scrollingSpeed = 0.005f;
+    [SerializeField] float scrollingSpeed = 0.03f;
 
     Game game;
     Material material;
@@ -19,7 +19,7 @@ public class ScrollingBackground : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (game.GetGameState() == Game.GameState.Playing) {
-            offset = new Vector2(0, offset.y + scrollingSpeed);
+            offset = new Vector2(0, offset.y + scrollingSpeed * Time.deltaTime);
             material.mainTextureOffset = offset;
         }
     }

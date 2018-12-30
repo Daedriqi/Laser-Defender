@@ -18,6 +18,7 @@ public class PlayerShip : MonoBehaviour {
     [SerializeField] float shootDelay = 0.30f;
     [SerializeField] List<GameObject> plasmaBalls;
     [SerializeField] GameObject destructor;
+    [SerializeField] float shotVolume = 0.1f;
 
     [Header("Effects")]
     [SerializeField] Sprite leftTurn;
@@ -37,7 +38,7 @@ public class PlayerShip : MonoBehaviour {
     //state variables
     int currentBigBombsLeft;
     int currentHealthLeft;
-    int currentShieldLeft;
+    float currentShieldLeft;
     int currentBulletSizeIndex = 0;
     int maxBibBombs = 3;
     bool shieldUp = false;
@@ -58,6 +59,7 @@ public class PlayerShip : MonoBehaviour {
     void Start() {
         healthBar = FindObjectOfType<HealthBarUI>();
         shield = Instantiate(shieldPrefab, new Vector3(-50, -50, -1), Quaternion.identity);
+        currentShieldLeft = shieldCapacity;
         defaultShootDelay = shootDelay;
         currentHealthLeft = playerHealth;
         currentBigBombsLeft = bigBombsCount;
@@ -66,6 +68,7 @@ public class PlayerShip : MonoBehaviour {
         defaultSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         GetMoveBoundaries();
         bigBombUI = FindObjectOfType<BigBombUI>();
+        bigBombUI.SetStartingXPos();
         bigBombUI.FillAmmoBar(currentBigBombsLeft);
     }
 
@@ -92,8 +95,6 @@ public class PlayerShip : MonoBehaviour {
 
     private void Shoot() {
         if (Input.GetButton("Fire1") && Time.time > timeBuffer) {
-            AudioClip clip = plasmaBalls[currentBulletSizeIndex].GetComponent<AudioSource>().clip;
-            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
             timeBuffer = Time.time + shootDelay;
             if (numberOfBullets >= 1) {
                 GameObject projectile1 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
@@ -127,12 +128,12 @@ public class PlayerShip : MonoBehaviour {
     }
 
     private void ShieldUp() {
-        if (Input.GetButton("ShieldUp") && shieldCapacity > 0) {
-            shieldCapacity -= 1.5f;
+        if (Input.GetButton("ShieldUp") && currentShieldLeft > 0) {
+            currentShieldLeft -= 1.5f;
             healthBar.UpdateShieldBar(-1.5f);
             shield.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
             shieldUp = true;
-            if (shieldCapacity == 0) {
+            if (currentShieldLeft <= 0) {
                 shield.transform.position = new Vector3(-50, -50, 0);
                 shieldUp = false;
             }
@@ -225,6 +226,7 @@ public class PlayerShip : MonoBehaviour {
             shootDelay += 0.05f;
         }
         if (currentHealthLeft - damage <= 0) {
+            currentHealthLeft -= 9999999;
             StopAllCoroutines();
             StartCoroutine(DeathAnimation());
         }

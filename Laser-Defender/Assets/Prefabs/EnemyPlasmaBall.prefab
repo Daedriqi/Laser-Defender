@@ -131,4 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb60b2993f9a91488bd65fe80f79604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
+  shootSound: {fileID: 8300000, guid: 9a441e078f569aa45b635ae2a0d8ab5b, type: 3}
+  shootVolume: 0.25

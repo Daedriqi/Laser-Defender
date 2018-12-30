@@ -113,6 +113,8 @@ MonoBehaviour:
   enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
     type: 3}
   projectileSpeed: 5
+  shootVolume: 0.25
+  shootSound: {fileID: 8300000, guid: 9a441e078f569aa45b635ae2a0d8ab5b, type: 3}
   explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
 --- !u!58 &7830412924541256884
@@ -143,4 +145,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb60b2993f9a91488bd65fe80f79604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
+  damage: 30

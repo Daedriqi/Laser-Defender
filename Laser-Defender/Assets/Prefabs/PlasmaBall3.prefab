@@ -4831,7 +4831,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f402b1c66b2bac64b9afbe1db15ea830, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4928,3 +4928,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  shootSound: {fileID: 8300000, guid: f402b1c66b2bac64b9afbe1db15ea830, type: 3}
+  shootVolume: 0.05

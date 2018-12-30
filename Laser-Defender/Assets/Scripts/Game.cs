@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Game : MonoBehaviour {
     //configuration parameters
     [SerializeField] AudioClip menuMusic;
-    [Range(0f,10f)][SerializeField] float gameSpeed = 1;
+    [Range(0f, 10f)] [SerializeField] float gameSpeed = 1;
     [SerializeField] AudioClip gameOverMusic;
     [SerializeField] AudioClip gameMusic;
     [SerializeField] AudioClip victoryMusic;
     [SerializeField] GameState state = GameState.Playing;
     [SerializeField] GameObject restartButton;
     [SerializeField] int enemyHealthScaling = 1;
+    [SerializeField] GameObject healthBarUIObject;
 
     //cache references
     int score;
     Text scoreboard;
-    Text gameOverText;
-    int maxHealthScaler = 75;
+    Text statusText;
+    int maxHealthScaler = 150;
     int currentHealthScaling = 0;
     PlayerShip playerShip;
     BigBombUI bigBombUI;
@@ -29,6 +31,7 @@ public class Game : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        Screen.SetResolution(450, 800, false);
         playerShip = FindObjectOfType<PlayerShip>();
         score = 0;
         Game[] games = FindObjectsOfType<Game>();
@@ -40,40 +43,61 @@ public class Game : MonoBehaviour {
             audioSource = gameObject.GetComponent<AudioSource>();
             SetGameState(GameState.Playing);
         }
-        Text[] texts = FindObjectsOfType<Text>();
-        for (int textIndex = 0; textIndex < texts.Length; textIndex++) {
-            if (texts[textIndex].gameObject.tag == "GameOverText") {
-                gameOverText = texts[textIndex];
-            }
-            if (texts[textIndex].gameObject.tag == "Scoreboard") {
-                scoreboard = texts[textIndex];
-            }
-        }
-
+        GameObject statusTextObject = GameObject.FindGameObjectWithTag("StatusText");
+        statusText = statusTextObject.GetComponent<Text>();
+        GameObject scoreboardObject = GameObject.FindGameObjectWithTag("Scoreboard");
+        scoreboard = scoreboardObject.GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update() {
-
+        if (Input.GetKeyDown(KeyCode.P)) {
+            if (state == GameState.Playing) {
+                SetGameState(GameState.Paused);
+            }
+            else if (state == GameState.Paused) {
+                SetGameState(GameState.Playing);
+            }
+        }
     }
 
     public void SetGameState(GameState newState) {
+        GameObject statusTextObject = GameObject.FindGameObjectWithTag("StatusText");
+        statusText = statusTextObject.GetComponent<Text>();
+        GameObject scoreboardObject = GameObject.FindGameObjectWithTag("Scoreboard");
+        scoreboard = scoreboardObject.GetComponent<Text>();
         state = newState;
         if (newState == GameState.Playing) {
-            audioSource.Stop();
-            audioSource.clip = gameMusic;
-            audioSource.Play();
+            if (audioSource.clip != gameMusic) {
+                audioSource.Stop();
+                audioSource.clip = gameMusic;
+                audioSource.Play();
+            }
+            scoreboard.text = "Score: " + score;
+            healthBarUIObject.SetActive(true);
+            Time.timeScale = 1;
+            statusText.GetComponent<Text>().text = "";
         }
         if (newState == GameState.Paused) {
-            audioSource.Stop();
+            Time.timeScale = 0;
+            statusText.GetComponent<Text>().text = "Paused";
         }
         if (newState == GameState.GameOver) {
             GameOver();
+            healthBarUIObject.SetActive(false);
+            ParticleSystem[] particleSystems = FindObjectsOfType<ParticleSystem>();
+            foreach (ParticleSystem particleSystem in particleSystems) {
+                particleSystem.Pause();
+            }
+        }
+        if (newState == GameState.Menu) {
+            scoreboard.text = "";
+            healthBarUIObject.SetActive(false);
         }
     }
 
     public void RoundComplete() {
-        if (enemyHealthScaling < maxHealthScaler) {
+        if (currentHealthScaling < maxHealthScaler) {
             currentHealthScaling += enemyHealthScaling;
         }
     }
@@ -83,13 +107,8 @@ public class Game : MonoBehaviour {
     }
 
     private void GameOver() {
-        GameObject[] everything = FindObjectsOfType<GameObject>();
-        foreach (GameObject thing in everything) {
-            if (thing.GetComponent<Rigidbody2D>() != null) {
-                thing.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            }
-        }
-        gameOverText.text = "Game Over";
+        Time.timeScale = 0;
+        statusText.text = "Game Over";
         restartButton.SetActive(true);
         audioSource.Stop();
         audioSource.clip = gameOverMusic;
@@ -113,8 +132,9 @@ public class Game : MonoBehaviour {
         healthBarUI.UpdateHealthBar(300);
         healthBarUI.UpdateShieldBar(300);
         restartButton.SetActive(false);
+        currentHealthScaling = 0;
         Time.timeScale = 1;
-        gameOverText.text = "";
+        statusText.text = "";
         scoreboard.text = "Score: 0";
         SceneManager.LoadScene(0);
     }
@@ -135,6 +155,7 @@ public class Game : MonoBehaviour {
         Playing,
         Paused,
         GameOver,
-        Victory
+        Victory,
+        Menu
     }
 }

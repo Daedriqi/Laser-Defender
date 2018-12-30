@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 8841613772960843957, guid: 4fbcbec5c8bd0624b9d757fbd8df1339, type: 3}
   destructor: {fileID: 7628457572313487382, guid: b17b0b86e1bef5541981a68d4eec852b,
     type: 3}
+  shotVolume: 0.1
   leftTurn: {fileID: 21300012, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
   rightTurn: {fileID: 21300016, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
   deathExplosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
@@ -129,7 +130,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0996aafe35232174a9e3745a5d1d240c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0

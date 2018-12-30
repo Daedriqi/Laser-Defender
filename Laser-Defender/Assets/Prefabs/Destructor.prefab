@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 999999999
+  shootSound: {fileID: 8300000, guid: 889d036bff869254b8b2b90f64e9c57c, type: 3}
+  shootVolume: 0.75
 --- !u!70 &4143889055493395358
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

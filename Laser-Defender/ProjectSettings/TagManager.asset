@@ -14,6 +14,7 @@ TagManager:
   - HealthBar
   - ShieldBar
   - Destructor
+  - StatusText
   layers:
   - Default
   - TransparentFX
