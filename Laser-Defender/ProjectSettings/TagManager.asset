@@ -15,6 +15,7 @@ TagManager:
   - ShieldBar
   - Destructor
   - StatusText
+  - QuitButton
   layers:
   - Default
   - TransparentFX

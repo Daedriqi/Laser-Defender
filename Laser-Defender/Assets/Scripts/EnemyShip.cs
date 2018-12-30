@@ -34,7 +34,7 @@ public class EnemyShip : MonoBehaviour {
 
     private IEnumerator ShootOnDelay() {
         while (true) {
-            randomWaitTime = UnityEngine.Random.Range(0.0f, shootRandomRange);
+            randomWaitTime = UnityEngine.Random.Range(0.5f, shootRandomRange);
             yield return new WaitForSeconds(randomWaitTime);
             if (game.GetGameState() == Game.GameState.Playing) {
                 Vector3 instantiatePos = new Vector3(transform.position.x, transform.position.y - 0.5f, 0);

@@ -13,9 +13,10 @@ public class Game : MonoBehaviour {
     [SerializeField] AudioClip gameMusic;
     [SerializeField] AudioClip victoryMusic;
     [SerializeField] GameState state = GameState.Playing;
-    [SerializeField] GameObject restartButton;
     [SerializeField] int enemyHealthScaling = 1;
     [SerializeField] GameObject healthBarUIObject;
+    [SerializeField] GameObject restartButton;
+    [SerializeField] GameObject quitButton;
 
     //cache references
     int score;
@@ -59,6 +60,10 @@ public class Game : MonoBehaviour {
                 SetGameState(GameState.Playing);
             }
         }
+    }
+
+    public void QuitGame() {
+        Application.Quit();
     }
 
     public void SetGameState(GameState newState) {
@@ -110,6 +115,7 @@ public class Game : MonoBehaviour {
         Time.timeScale = 0;
         statusText.text = "Game Over";
         restartButton.SetActive(true);
+        quitButton.SetActive(true);
         audioSource.Stop();
         audioSource.clip = gameOverMusic;
         audioSource.Play();
@@ -132,6 +138,7 @@ public class Game : MonoBehaviour {
         healthBarUI.UpdateHealthBar(300);
         healthBarUI.UpdateShieldBar(300);
         restartButton.SetActive(false);
+        quitButton.SetActive(false);
         currentHealthScaling = 0;
         Time.timeScale = 1;
         statusText.text = "";

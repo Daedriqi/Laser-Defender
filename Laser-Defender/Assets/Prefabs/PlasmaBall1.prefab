@@ -4929,4 +4929,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 15
   shootSound: {fileID: 8300000, guid: f402b1c66b2bac64b9afbe1db15ea830, type: 3}
-  shootVolume: 0.05
+  shootVolume: 0.025

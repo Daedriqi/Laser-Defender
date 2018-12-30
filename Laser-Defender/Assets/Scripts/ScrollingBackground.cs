@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScrollingBackground : MonoBehaviour {
-    [SerializeField] float scrollingSpeed = 0.03f;
+    [Range(0, 1)][SerializeField] float scrollingSpeed = 0.03f;
 
     Game game;
     Material material;

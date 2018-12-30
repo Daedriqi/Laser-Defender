@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour {
     [SerializeField] PowerUpType type;
     [SerializeField] AudioClip powerUpSound;
-    [SerializeField] float clipVolume = 0.25f;
+    [Range(0, 1)][SerializeField] float clipVolume = 0.25f;
 
 
     HealthBarUI healthBarUI;
