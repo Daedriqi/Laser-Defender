@@ -132,3 +132,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  powerUpSound: {fileID: 8300000, guid: d0aa6126665925440b4932ab43c667e9, type: 3}
+  clipVolume: 0.25

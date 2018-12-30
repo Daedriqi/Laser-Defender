@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour {
     [SerializeField] PowerUpType type;
+    [SerializeField] AudioClip powerUpSound;
+    [SerializeField] float clipVolume = 0.25f;
+
 
     HealthBarUI healthBarUI;
 
@@ -18,6 +21,7 @@ public class PowerUp : MonoBehaviour {
     }
 
     public void GetPowerUpEffect(GameObject playerObject) {
+        AudioSource.PlayClipAtPoint(powerUpSound, Camera.main.transform.position, clipVolume);
         PlayerShip player = playerObject.GetComponent<PlayerShip>();
         if (type == PowerUpType.HealthUp) {
             player.UpdatePlayerHealth(25);
