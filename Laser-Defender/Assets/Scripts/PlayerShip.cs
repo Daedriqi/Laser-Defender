@@ -32,6 +32,7 @@ public class PlayerShip : MonoBehaviour {
     Sprite defaultSprite;
     GameObject shield;
     HealthBarUI healthBar;
+    BigBombUI bigBombUI;
 
     //state variables
     int currentBigBombsLeft;
@@ -64,6 +65,8 @@ public class PlayerShip : MonoBehaviour {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         defaultSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         GetMoveBoundaries();
+        bigBombUI = FindObjectOfType<BigBombUI>();
+        bigBombUI.FillAmmoBar(currentBigBombsLeft);
     }
 
     private void GetMoveBoundaries() {
@@ -117,6 +120,7 @@ public class PlayerShip : MonoBehaviour {
     }
 
     private void BigBombBlast() {
+        bigBombUI.RemoveAmmo();
         currentBigBombsLeft -= 1;
         GameObject bigBomb = Instantiate(destructor, new Vector3(0, -5f, 0), Quaternion.identity);
         bigBomb.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10);
@@ -158,43 +162,39 @@ public class PlayerShip : MonoBehaviour {
     }
 
     public void UpdateBigBlastAmmo() {
-        if (currentBigBombsLeft < maxBibBombs) {
-            currentBigBombsLeft++;
+        currentBigBombsLeft++;
+        if (currentBigBombsLeft > maxBibBombs) {
+            currentBigBombsLeft = maxBibBombs;
+        }
+        else {
+            FindObjectOfType<BigBombUI>().FillAmmoBar(1);
         }
     }
 
     public void UpdatePlayerHealth(int amountToChange) {
-        if (currentHealthLeft < 150) {
-            currentHealthLeft += amountToChange;
-        }
-        else {
+        currentHealthLeft += amountToChange;
+        if (currentHealthLeft > 150) {
             currentHealthLeft = 150;
         }
     }
 
     public void UpdatePlayerShield(int amountToChange) {
-        if (currentShieldLeft < 150) {
-            currentShieldLeft += amountToChange;
-        }
-        else {
+        currentShieldLeft += amountToChange;
+        if (currentShieldLeft > 150) {
             currentShieldLeft = 150;
         }
     }
 
     public void IncreaseBulletQuantity() {
-        if (numberOfBullets < 12) {
-            numberOfBullets += 4;
-        }
-        else {
+        numberOfBullets += 4;
+        if (numberOfBullets > 12) {
             numberOfBullets = 12;
         }
     }
 
     public void DecreaseShootDelay() {
-        if (shootDelay > 0.1f) {
-            shootDelay -= 0.05f;
-        }
-        else {
+        shootDelay -= 0.05f;
+        if (shootDelay < 0.1f) {
             shootDelay = 0.1f;
         }
     }

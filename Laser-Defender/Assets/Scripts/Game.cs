@@ -21,12 +21,15 @@ public class Game : MonoBehaviour {
     Text gameOverText;
     int maxHealthScaler = 75;
     int currentHealthScaling = 0;
+    PlayerShip playerShip;
+    BigBombUI bigBombUI;
 
     //state variables
     AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start() {
+        playerShip = FindObjectOfType<PlayerShip>();
         score = 0;
         Game[] games = FindObjectsOfType<Game>();
         if (games.Length > 1) {
@@ -46,6 +49,7 @@ public class Game : MonoBehaviour {
                 scoreboard = texts[textIndex];
             }
         }
+
     }
 
     // Update is called once per frame

@@ -37,7 +37,7 @@ public class PowerUp : MonoBehaviour {
             healthBarUI.UpdateShieldBar(40);
         }
         if (type == PowerUpType.BigBlastAmmo) {
-            player.UpdateBigBlastAmmo();
+            player.UpdateBigBlastAmmo();            
         }
     }
 
