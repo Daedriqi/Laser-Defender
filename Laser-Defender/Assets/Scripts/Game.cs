@@ -15,13 +15,14 @@ public class Game : MonoBehaviour {
     [SerializeField] GameState state = GameState.Playing;
     [SerializeField] int enemyHealthScaling = 1;
     [SerializeField] GameObject healthBarUIObject;
-    [SerializeField] GameObject restartButton;
+    [SerializeField] GameObject playButton;
+    [SerializeField] GameObject settingsButton;
     [SerializeField] GameObject quitButton;
+    [SerializeField] Text scoreboard;
+    [SerializeField] Text statusText;
 
     //cache references
     int score;
-    Text scoreboard;
-    Text statusText;
     int maxHealthScaler = 150;
     int currentHealthScaling = 0;
     PlayerShip playerShip;
@@ -33,8 +34,6 @@ public class Game : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         Screen.SetResolution(450, 800, false);
-        playerShip = FindObjectOfType<PlayerShip>();
-        score = 0;
         Game[] games = FindObjectsOfType<Game>();
         if (games.Length > 1) {
             Destroy(gameObject);
@@ -42,12 +41,8 @@ public class Game : MonoBehaviour {
         else {
             DontDestroyOnLoad(gameObject);
             audioSource = gameObject.GetComponent<AudioSource>();
-            SetGameState(GameState.Playing);
+            SetGameState(GameState.Menu);
         }
-        GameObject statusTextObject = GameObject.FindGameObjectWithTag("StatusText");
-        statusText = statusTextObject.GetComponent<Text>();
-        GameObject scoreboardObject = GameObject.FindGameObjectWithTag("Scoreboard");
-        scoreboard = scoreboardObject.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -66,39 +61,42 @@ public class Game : MonoBehaviour {
         Application.Quit();
     }
 
+    public void ResumeGame() {
+        SetGameState(GameState.Playing);
+    }
+
+    public void Settings() {
+        //TODO fill this
+    }
+
     public void SetGameState(GameState newState) {
-        GameObject statusTextObject = GameObject.FindGameObjectWithTag("StatusText");
-        statusText = statusTextObject.GetComponent<Text>();
-        GameObject scoreboardObject = GameObject.FindGameObjectWithTag("Scoreboard");
-        scoreboard = scoreboardObject.GetComponent<Text>();
         state = newState;
         if (newState == GameState.Playing) {
+            playerShip = FindObjectOfType<PlayerShip>();
+            healthBarUIObject.transform.localScale = new Vector3(2.5f, 2.5f, 1);
             if (audioSource.clip != gameMusic) {
                 audioSource.Stop();
                 audioSource.clip = gameMusic;
                 audioSource.Play();
             }
+            scoreboard.transform.localScale = new Vector3(1, 1, 1);
             scoreboard.text = "Score: " + score;
-            healthBarUIObject.SetActive(true);
             Time.timeScale = 1;
             statusText.GetComponent<Text>().text = "";
         }
         if (newState == GameState.Paused) {
+
             Time.timeScale = 0;
             statusText.GetComponent<Text>().text = "Paused";
         }
         if (newState == GameState.GameOver) {
             GameOver();
-            healthBarUIObject.SetActive(false);
-            ParticleSystem[] particleSystems = FindObjectsOfType<ParticleSystem>();
-            foreach (ParticleSystem particleSystem in particleSystems) {
-                particleSystem.Pause();
-            }
         }
         if (newState == GameState.Menu) {
             scoreboard.text = "";
-            healthBarUIObject.SetActive(false);
+            healthBarUIObject.transform.localScale = new Vector3(0, 0, 0);
         }
+
     }
 
     public void RoundComplete() {
@@ -113,9 +111,16 @@ public class Game : MonoBehaviour {
 
     private void GameOver() {
         Time.timeScale = 0;
+        quitButton = GameObject.FindGameObjectWithTag("QuitButton");
+        playButton = GameObject.FindGameObjectWithTag("PlayButton");
+        settingsButton = GameObject.FindGameObjectWithTag("SettingsButton");
+        statusText = GameObject.FindGameObjectWithTag("StatusText").GetComponent<Text>();
+        scoreboard = GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<Text>();
+        quitButton.transform.localScale = new Vector3(1, 1, 1);
+        playButton.transform.localScale = new Vector3(1, 1, 1);
+        settingsButton.transform.localScale = new Vector3(1, 1, 1);
         statusText.text = "Game Over";
-        restartButton.SetActive(true);
-        quitButton.SetActive(true);
+        audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.Stop();
         audioSource.clip = gameOverMusic;
         audioSource.Play();
@@ -137,13 +142,15 @@ public class Game : MonoBehaviour {
         HealthBarUI healthBarUI = FindObjectOfType<HealthBarUI>();
         healthBarUI.UpdateHealthBar(300);
         healthBarUI.UpdateShieldBar(300);
-        restartButton.SetActive(false);
-        quitButton.SetActive(false);
+        healthBarUI.transform.localScale = new Vector3(2.5f, 2.5f, 1);
+        quitButton.transform.localScale = new Vector3(0, 0, 0);
+        playButton.transform.localScale = new Vector3(0, 0, 0);
+        settingsButton.transform.localScale = new Vector3(0, 0, 0);
         currentHealthScaling = 0;
         Time.timeScale = 1;
         statusText.text = "";
         scoreboard.text = "Score: 0";
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Level 1");
     }
 
     public void PauseGame() {

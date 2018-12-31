@@ -80,7 +80,7 @@ public class EnemyShip : MonoBehaviour {
                 Text[] texts = FindObjectsOfType<Text>();
                 for (int textIndex = 0; textIndex < texts.Length; textIndex++) {
                     if (texts[textIndex].gameObject.tag == "Scoreboard") {
-                        texts[textIndex].text = score.ToString();
+                        texts[textIndex].text = "Score: " + score;
                     }
                 }
                 GameObject explosion = Instantiate(explosionVFX, transform.position, Quaternion.identity);

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerShip : MonoBehaviour {
     //configuration parameters
@@ -57,13 +58,14 @@ public class PlayerShip : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        EventSystem.current.SetSelectedGameObject(null);
         healthBar = FindObjectOfType<HealthBarUI>();
         shield = Instantiate(shieldPrefab, new Vector3(-50, -50, -1), Quaternion.identity);
         currentShieldLeft = shieldCapacity;
         defaultShootDelay = shootDelay;
         currentHealthLeft = playerHealth;
         currentBigBombsLeft = bigBombsCount;
-        game = FindObjectOfType<Game>();
+        game = GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         defaultSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         GetMoveBoundaries();

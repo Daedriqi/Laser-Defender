@@ -18,6 +18,8 @@ public class HealthBarUI : MonoBehaviour {
         currentHealthXPos = maxXPos;
         currentShieldWidth = maxWidth;
         currentShieldXPos = maxXPos;
+        healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<RectTransform>();
+        shieldBar = GameObject.FindGameObjectWithTag("ShieldBar").GetComponent<RectTransform>();
     }
 
     public void UpdateHealthBar(float amountToChange) {

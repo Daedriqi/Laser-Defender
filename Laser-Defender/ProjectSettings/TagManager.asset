@@ -16,6 +16,9 @@ TagManager:
   - Destructor
   - StatusText
   - QuitButton
+  - Canvas
+  - PlayButton
+  - SettingsButton
   layers:
   - Default
   - TransparentFX
