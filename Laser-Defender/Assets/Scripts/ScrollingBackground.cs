@@ -18,7 +18,7 @@ public class ScrollingBackground : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (game.GetGameState() == Game.GameState.Playing) {
+        if (game.GetGameState() == Game.GameState.Playing || game.GetGameState() == Game.GameState.Menu) {
             offset = new Vector2(0, offset.y + scrollingSpeed * Time.deltaTime);
             material.mainTextureOffset = offset;
         }

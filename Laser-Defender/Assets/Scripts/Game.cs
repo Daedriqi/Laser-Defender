@@ -16,6 +16,7 @@ public class Game : MonoBehaviour {
     [SerializeField] int enemyHealthScaling = 1;
     [SerializeField] GameObject healthBarUIObject;
     [SerializeField] GameObject playButton;
+    [SerializeField] Text playButtonText;
     [SerializeField] GameObject settingsButton;
     [SerializeField] GameObject quitButton;
     [SerializeField] Text scoreboard;
@@ -73,30 +74,43 @@ public class Game : MonoBehaviour {
         state = newState;
         if (newState == GameState.Playing) {
             playerShip = FindObjectOfType<PlayerShip>();
-            healthBarUIObject.transform.localScale = new Vector3(2.5f, 2.5f, 1);
+            healthBarUIObject.SetActive(true);
             if (audioSource.clip != gameMusic) {
                 audioSource.Stop();
                 audioSource.clip = gameMusic;
                 audioSource.Play();
             }
-            scoreboard.transform.localScale = new Vector3(1, 1, 1);
             scoreboard.text = "Score: " + score;
             Time.timeScale = 1;
-            statusText.GetComponent<Text>().text = "";
+            statusText.text = "";
+            ButtonsShowHide(false);
         }
         if (newState == GameState.Paused) {
-
+            ButtonsShowHide(true);
             Time.timeScale = 0;
-            statusText.GetComponent<Text>().text = "Paused";
+            statusText.text = "Paused";
+            playButtonText.text = "Restart";
         }
         if (newState == GameState.GameOver) {
             GameOver();
         }
         if (newState == GameState.Menu) {
             scoreboard.text = "";
-            healthBarUIObject.transform.localScale = new Vector3(0, 0, 0);
+            healthBarUIObject.SetActive(false);
         }
+    }
 
+    private void ButtonsShowHide(bool showButtons) {
+        if (showButtons) {
+            playButton.SetActive(true);
+            settingsButton.SetActive(true);
+            quitButton.SetActive(true);
+        }
+        else {
+            playButton.SetActive(false);
+            settingsButton.SetActive(false);
+            quitButton.SetActive(false);
+        }
     }
 
     public void RoundComplete() {
@@ -111,14 +125,10 @@ public class Game : MonoBehaviour {
 
     private void GameOver() {
         Time.timeScale = 0;
-        quitButton = GameObject.FindGameObjectWithTag("QuitButton");
-        playButton = GameObject.FindGameObjectWithTag("PlayButton");
-        settingsButton = GameObject.FindGameObjectWithTag("SettingsButton");
-        statusText = GameObject.FindGameObjectWithTag("StatusText").GetComponent<Text>();
-        scoreboard = GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<Text>();
-        quitButton.transform.localScale = new Vector3(1, 1, 1);
-        playButton.transform.localScale = new Vector3(1, 1, 1);
-        settingsButton.transform.localScale = new Vector3(1, 1, 1);
+        quitButton.SetActive(true);
+        playButton.SetActive(true);
+        settingsButton.SetActive(true);
+        playButtonText.text = "Try Again";
         statusText.text = "Game Over";
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.Stop();
@@ -142,10 +152,10 @@ public class Game : MonoBehaviour {
         HealthBarUI healthBarUI = FindObjectOfType<HealthBarUI>();
         healthBarUI.UpdateHealthBar(300);
         healthBarUI.UpdateShieldBar(300);
-        healthBarUI.transform.localScale = new Vector3(2.5f, 2.5f, 1);
-        quitButton.transform.localScale = new Vector3(0, 0, 0);
-        playButton.transform.localScale = new Vector3(0, 0, 0);
-        settingsButton.transform.localScale = new Vector3(0, 0, 0);
+        healthBarUIObject.SetActive(true);
+        quitButton.SetActive(false);
+        playButton.SetActive(false);
+        settingsButton.SetActive(false);
         currentHealthScaling = 0;
         Time.timeScale = 1;
         statusText.text = "";

@@ -252,6 +252,9 @@ public class PlayerShip : MonoBehaviour {
     }
 
     private IEnumerator DeathAnimation() {
+        if (!spriteRenderer.enabled) {
+            spriteRenderer.enabled = true;
+        }
         game.SetTimeScale(0.35f);
         StartCoroutine(DeathExplostions());
         yield return new WaitForSeconds(0.75f);
