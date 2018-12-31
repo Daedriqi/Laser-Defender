@@ -150,10 +150,10 @@ public class Game : MonoBehaviour {
         StopAllCoroutines();
         score = 0;
         SetGameState(GameState.Playing);
+        healthBarUIObject.SetActive(true);
         HealthBarUI healthBarUI = FindObjectOfType<HealthBarUI>();
         healthBarUI.UpdateHealthBar(300);
         healthBarUI.UpdateShieldBar(300);
-        healthBarUIObject.SetActive(true);
         quitButton.SetActive(false);
         playButton.SetActive(false);
         settingsButton.SetActive(false);

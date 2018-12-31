@@ -62,8 +62,8 @@ public class EnemySpawner : MonoBehaviour {
             EnemyShip enemyShip = enemy.GetComponent<EnemyShip>();
             enemyShip.SetHealthOnSpawn(game.GetHealthScaling());
             enemiesSpawned++;
-            enemyShip.MakeDamagable();
             yield return new WaitForSeconds(waveToSpawn.GetTimeBetweenSpawns());
+            enemyShip.MakeDamagable();
         }
     }
 }

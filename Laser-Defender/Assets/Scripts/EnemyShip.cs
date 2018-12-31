@@ -54,7 +54,7 @@ public class EnemyShip : MonoBehaviour {
     }
     
     public void SetHealthOnSpawn(int health) {
-        enemyHealth = enemyHealth + health;
+        enemyHealth += health;
         currentHitsLeft = enemyHealth;
     }
 
@@ -73,12 +73,7 @@ public class EnemyShip : MonoBehaviour {
                     GameObject powerUp = Instantiate(waveContainer.GetWave().GetPowerUp(), transform.position, Quaternion.identity);
                     powerUp.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
                 }
-                Text[] texts = FindObjectsOfType<Text>();
-                for (int textIndex = 0; textIndex < texts.Length; textIndex++) {
-                    if (texts[textIndex].gameObject.tag == "Scoreboard") {
-                        texts[textIndex].text = "Score: " + score;
-                    }
-                }
+                GameObject.FindGameObjectWithTag("StatusText").GetComponent<Text>().text = "Score: " + score;
                 GameObject explosion = Instantiate(explosionVFX, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
