@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using TMPro;
 
 public class Game : MonoBehaviour {
     //configuration parameters
@@ -16,11 +17,11 @@ public class Game : MonoBehaviour {
     [SerializeField] int enemyHealthScaling = 1;
     [SerializeField] GameObject healthBarUIObject;
     [SerializeField] GameObject playButton;
-    [SerializeField] Text playButtonText;
+    [SerializeField] TextMeshProUGUI playButtonText;
     [SerializeField] GameObject settingsButton;
     [SerializeField] GameObject quitButton;
     [SerializeField] Text scoreboard;
-    [SerializeField] Text statusText;
+    [SerializeField] TextMeshProUGUI statusText;
 
     //cache references
     int score;
@@ -48,7 +49,7 @@ public class Game : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetButtonDown("Pause")) {
             if (state == GameState.Playing) {
                 SetGameState(GameState.Paused);
             }

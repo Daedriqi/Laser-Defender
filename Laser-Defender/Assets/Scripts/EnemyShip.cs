@@ -52,11 +52,7 @@ public class EnemyShip : MonoBehaviour {
     public void MakeDamagable() {
         immuneToDamage = false;
     }
-
-    private void OnDestroy() {
-        StopCoroutine(shootOnDelay);
-    }
-
+    
     public void SetHealthOnSpawn(int health) {
         enemyHealth = enemyHealth + health;
         currentHitsLeft = enemyHealth;

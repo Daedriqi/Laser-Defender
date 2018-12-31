@@ -148,8 +148,8 @@ public class PlayerShip : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (!immuneToDamage && collision.gameObject.tag.Contains("Enemy") && !shieldUp) {
-            AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
             immuneToDamage = true;
+            AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
             int damage = collision.GetComponent<DamageDealer>().GetDamage();
             StartCoroutine(DamagePlayer(damage));
         }
@@ -209,8 +209,8 @@ public class PlayerShip : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision) {
         if (!immuneToDamage && collision.gameObject.tag == "Enemy" && !shieldUp) {
-            AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
             immuneToDamage = true;
+            AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
             int damage = collision.GetComponent<DamageDealer>().GetDamage();
             StartCoroutine(DamagePlayer(damage));
         }
@@ -218,6 +218,8 @@ public class PlayerShip : MonoBehaviour {
 
     public IEnumerator DamagePlayer(int damage) {
         healthBar.UpdateHealthBar(-damage);
+        UpdatePlayerHealth(-damage);
+        StartCoroutine(flashSprite());
         if (numberOfBullets > defaultNumberOfBullets) {
             numberOfBullets -= 1;
         }
@@ -227,14 +229,10 @@ public class PlayerShip : MonoBehaviour {
         if (shootDelay < defaultShootDelay) {
             shootDelay += 0.05f;
         }
-        if (currentHealthLeft - damage <= 0) {
+        if (currentHealthLeft <= 0) {
             currentHealthLeft -= 9999999;
             StopAllCoroutines();
             StartCoroutine(DeathAnimation());
-        }
-        else {
-            StartCoroutine(flashSprite());
-            currentHealthLeft -= damage;
         }
         yield return new WaitForSeconds(damageImmunityTime);
         StopCoroutine(DamagePlayer(damage));
