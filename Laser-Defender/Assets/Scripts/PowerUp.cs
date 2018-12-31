@@ -25,7 +25,6 @@ public class PowerUp : MonoBehaviour {
         PlayerShip player = playerObject.GetComponent<PlayerShip>();
         if (type == PowerUpType.HealthUp) {
             player.UpdatePlayerHealth(25);
-            healthBarUI.UpdateHealthBar(25);
         }
         if (type == PowerUpType.ProjectileQuantityUp) {
             player.IncreaseBulletQuantity();
@@ -38,7 +37,6 @@ public class PowerUp : MonoBehaviour {
         }
         if (type == PowerUpType.ShieldBoost) {
             player.UpdatePlayerShield(40);
-            healthBarUI.UpdateShieldBar(40);
         }
         if (type == PowerUpType.BigBlastAmmo) {
             player.UpdateBigBlastAmmo();            

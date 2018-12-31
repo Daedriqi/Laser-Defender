@@ -131,8 +131,7 @@ public class PlayerShip : MonoBehaviour {
 
     private void ShieldUp() {
         if (Input.GetButton("ShieldUp") && currentShieldLeft > 0) {
-            currentShieldLeft -= 1.5f;
-            healthBar.UpdateShieldBar(-1.5f);
+            UpdatePlayerShield(-1.5f);
             shield.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
             shieldUp = true;
             if (currentShieldLeft <= 0) {
@@ -176,13 +175,15 @@ public class PlayerShip : MonoBehaviour {
 
     public void UpdatePlayerHealth(int amountToChange) {
         currentHealthLeft += amountToChange;
+        healthBar.UpdateHealthBar(amountToChange);
         if (currentHealthLeft > 150) {
             currentHealthLeft = 150;
         }
     }
 
-    public void UpdatePlayerShield(int amountToChange) {
+    public void UpdatePlayerShield(float amountToChange) {
         currentShieldLeft += amountToChange;
+        healthBar.UpdateShieldBar(amountToChange);
         if (currentShieldLeft > 150) {
             currentShieldLeft = 150;
         }
@@ -217,7 +218,6 @@ public class PlayerShip : MonoBehaviour {
     }
 
     public IEnumerator DamagePlayer(int damage) {
-        healthBar.UpdateHealthBar(-damage);
         UpdatePlayerHealth(-damage);
         StartCoroutine(flashSprite());
         if (numberOfBullets > defaultNumberOfBullets) {
