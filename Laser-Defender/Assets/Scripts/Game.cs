@@ -20,7 +20,7 @@ public class Game : MonoBehaviour {
     [SerializeField] TextMeshProUGUI playButtonText;
     [SerializeField] GameObject settingsButton;
     [SerializeField] GameObject quitButton;
-    [SerializeField] Text scoreboard;
+    [SerializeField] TextMeshProUGUI scoreboard;
     [SerializeField] TextMeshProUGUI statusText;
 
     //cache references
@@ -34,10 +34,9 @@ public class Game : MonoBehaviour {
     AudioSource audioSource;
 
     // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         Screen.SetResolution(450, 800, false);
-        Game[] games = FindObjectsOfType<Game>();
-        if (games.Length > 1) {
+        if (FindObjectsOfType(GetType()).Length > 1) {
             Destroy(gameObject);
         }
         else {
@@ -45,10 +44,15 @@ public class Game : MonoBehaviour {
             audioSource = gameObject.GetComponent<AudioSource>();
             SetGameState(GameState.Menu);
         }
+        playerShip = FindObjectOfType<PlayerShip>();
     }
 
     // Update is called once per frame
     void Update() {
+        PauseGame();
+    }
+
+    private void PauseGame() {
         if (Input.GetButtonDown("Pause")) {
             if (state == GameState.Playing) {
                 SetGameState(GameState.Paused);
@@ -74,7 +78,6 @@ public class Game : MonoBehaviour {
     public void SetGameState(GameState newState) {
         state = newState;
         if (newState == GameState.Playing) {
-            playerShip = FindObjectOfType<PlayerShip>();
             healthBarUIObject.SetActive(true);
             if (audioSource.clip != gameMusic) {
                 audioSource.Stop();
@@ -162,10 +165,6 @@ public class Game : MonoBehaviour {
         statusText.text = "";
         scoreboard.text = "Score: 0";
         SceneManager.LoadScene("Level 1");
-    }
-
-    public void PauseGame() {
-        SetGameState(GameState.Paused);
     }
 
     public GameState GetGameState() {

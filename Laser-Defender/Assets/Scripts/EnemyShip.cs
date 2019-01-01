@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemyShip : MonoBehaviour {
     [Header("Enemy")]
@@ -74,7 +75,7 @@ public class EnemyShip : MonoBehaviour {
                     GameObject powerUp = Instantiate(waveContainer.GetWave().GetPowerUp(), transform.position, Quaternion.identity);
                     powerUp.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
                 }
-                GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<Text>().text = "Score: " + score;
+                GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<TextMeshProUGUI>().text = score.ToString();
                 GameObject explosion = Instantiate(explosionVFX, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
