@@ -24,26 +24,29 @@ public class Game : MonoBehaviour {
     [SerializeField] TextMeshProUGUI statusText;
 
     //cache references
+    int levelIndex = 0;
     int score;
-    int maxHealthScaler = 150;
+    int maxHealthScaler = 25;
     int currentHealthScaling = 0;
     PlayerShip playerShip;
     BigBombUI bigBombUI;
+    HealthBarUI healthBarUI;
 
     //state variables
     AudioSource audioSource;
 
     // Start is called before the first frame update
     void Awake() {
-        Screen.SetResolution(450, 800, false);
+        audioSource = gameObject.GetComponent<AudioSource>();
+        healthBarUI = FindObjectOfType<HealthBarUI>();
         if (FindObjectsOfType(GetType()).Length > 1) {
             Destroy(gameObject);
         }
         else {
             DontDestroyOnLoad(gameObject);
-            audioSource = gameObject.GetComponent<AudioSource>();
-            SetGameState(GameState.Menu);
         }
+        audioSource = gameObject.GetComponent<AudioSource>();
+        SetGameState(GameState.Menu);
         playerShip = FindObjectOfType<PlayerShip>();
     }
 
@@ -123,6 +126,10 @@ public class Game : MonoBehaviour {
         }
     }
 
+    public void ResetHealthScaling() {
+        currentHealthScaling = 0;
+    }
+
     public int GetHealthScaling() {
         return currentHealthScaling;
     }
@@ -134,7 +141,6 @@ public class Game : MonoBehaviour {
         settingsButton.SetActive(true);
         playButtonText.text = "Try Again";
         statusText.text = "Game Over";
-        audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.Stop();
         audioSource.clip = gameOverMusic;
         audioSource.Play();
@@ -149,12 +155,16 @@ public class Game : MonoBehaviour {
         return score;
     }
 
+    public int GetLevelIndex() {
+        return levelIndex;
+    }
+
     public void RestartGame() {
         StopAllCoroutines();
+        levelIndex = 0;
         score = 0;
         SetGameState(GameState.Playing);
         healthBarUIObject.SetActive(true);
-        HealthBarUI healthBarUI = FindObjectOfType<HealthBarUI>();
         healthBarUI.UpdateHealthBar(300);
         healthBarUI.UpdateShieldBar(300);
         quitButton.SetActive(false);
@@ -164,7 +174,7 @@ public class Game : MonoBehaviour {
         Time.timeScale = 1;
         statusText.text = "";
         scoreboard.text = "Score: 0";
-        SceneManager.LoadScene("Level 1");
+        SceneManager.LoadScene("Game");
     }
 
     public GameState GetGameState() {

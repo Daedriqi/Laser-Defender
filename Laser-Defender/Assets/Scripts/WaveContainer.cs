@@ -21,6 +21,7 @@ public class WaveContainer : MonoBehaviour {
         StopCoroutine(waitForSpawns);
     }
 
+
     // Update is called once per frame
     void Update() {
         if (destroyable && transform.childCount == 0) {

@@ -324,7 +324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e334df494bd75d48bade5ab0ecd15d4, type: 3}
---- !u!1001 &3582943251733434045
+--- !u!1001 &2059149481
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -431,23 +431,15 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6874831775345461219, guid: 8c2997e78e5f2ce4aa2c3a30f7b7dc2e,
+    - target: {fileID: 1019974433322362339, guid: 8c2997e78e5f2ce4aa2c3a30f7b7dc2e,
         type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6874831775345461219, guid: 8c2997e78e5f2ce4aa2c3a30f7b7dc2e,
+    - target: {fileID: 1019974433322362339, guid: 8c2997e78e5f2ce4aa2c3a30f7b7dc2e,
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1508147008, guid: 8c2997e78e5f2ce4aa2c3a30f7b7dc2e, type: 3}
-      propertyPath: m_Name
-      value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1508147012, guid: 8c2997e78e5f2ce4aa2c3a30f7b7dc2e, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c2997e78e5f2ce4aa2c3a30f7b7dc2e, type: 3}

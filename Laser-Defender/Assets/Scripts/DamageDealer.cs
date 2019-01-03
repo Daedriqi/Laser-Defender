@@ -9,14 +9,22 @@ public class DamageDealer : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        if (shootSound) {
-            AudioSource.PlayClipAtPoint(shootSound, Camera.main.transform.position, shootVolume);
-        }
+
     }
 
     // Update is called once per frame
     void Update() {
 
+    }
+
+    public AudioClip GetSound()
+    {
+        return shootSound;
+    }
+
+    public float GetVolume()
+    {
+        return shootVolume;
     }
 
     public int GetDamage() {

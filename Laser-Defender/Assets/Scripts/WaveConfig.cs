@@ -5,16 +5,24 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Enemy Wave Config")]
 public class WaveConfig : ScriptableObject {
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] List<GameObject> powerUps;
     [SerializeField] List<GameObject> paths;
     [SerializeField] float timeBetweenSpawns = 0.5f;
     [SerializeField] float enemySpeed = 2f;
     [SerializeField] int enemyCount = 5;
 
+    GameObject enemyPrefab;
+
+    int randomRange;
+
 
     public GameObject GetEnemyPrefab() {
         return enemyPrefab;
+    }
+    
+    public void SetEnemyPrefab(int levelIndex) {
+        enemyPrefab = enemyPrefabs[levelIndex];
     }
 
     public List<List<Transform>> GetWaypoints() {
@@ -34,7 +42,7 @@ public class WaveConfig : ScriptableObject {
     }
 
     public GameObject GetPowerUp() {
-        int randomRange = Random.Range(0, 10);
+        int randomRange = Random.Range(0, powerUps.Count);
         return powerUps[randomRange];
     }
 

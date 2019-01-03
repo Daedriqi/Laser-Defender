@@ -14,6 +14,7 @@ TextureImporter:
     21300018: ENM_Effects01_9
     21300020: ENM_Effects01_10
     21300022: ENM_Effects01_11
+    21300024: ENM_Effects01_12
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -108,9 +109,9 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 07756fd6e95a01d4586f2df0dc44c9b6
+      spriteID: bae291d523163184aa401cbe8620e482
       vertices: []
       indices: 
       edges: []
@@ -128,9 +129,9 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1564c6bc062ed9b4eb9b82782ad985eb
+      spriteID: 9cac2f7d9932be747a54557d658910cf
       vertices: []
       indices: 
       edges: []
@@ -148,9 +149,9 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 838955c8dfed8d04b82934b206004f55
+      spriteID: 448d089563d12ca47a6804afb633e9dd
       vertices: []
       indices: 
       edges: []
@@ -160,47 +161,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 5
-        y: 21
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: abc8691964655a24bbc9379917d2c2ee
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ENM_Effects01_4
-      rect:
-        serializedVersion: 2
-        x: 12
-        y: 20
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f653430f633f9c64baf7f50a465507b0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ENM_Effects01_5
-      rect:
-        serializedVersion: 2
-        x: 21
-        y: 19
+        y: 29
         width: 5
         height: 10
       alignment: 0
@@ -208,15 +169,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bd4651f7c630592419f41ab604586124
+      spriteID: 090b95f31949c79458067a89ad867879
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ENM_Effects01_6
+      name: ENM_Effects01_4
       rect:
         serializedVersion: 2
         x: 31
@@ -228,15 +189,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c17295c2c6c43724d89abd416e8392ff
+      spriteID: ce7fa3e873174c14f81c3e6cb3a4d50c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ENM_Effects01_7
+      name: ENM_Effects01_5
       rect:
         serializedVersion: 2
         x: 48
@@ -248,15 +209,75 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: eb34359d2a69f1f478d20c314f93c092
+      spriteID: 01d8efca926b61a41b41dd9652281245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ENM_Effects01_6
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 21
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ec9f708211b61d4f814b90540c687c5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ENM_Effects01_7
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 20
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c277a3f13a2c52c409da2af9f91afc35
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: ENM_Effects01_8
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 19
+        width: 5
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52b58205c85919943895aece3b3d09c0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ENM_Effects01_9
       rect:
         serializedVersion: 2
         x: 5
@@ -268,15 +289,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6dd67130f3bd68a4faf1ca2eb3d1d0b3
+      spriteID: 16684ab3dbdc9ba4f96d50746f1e94c4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ENM_Effects01_9
+      name: ENM_Effects01_10
       rect:
         serializedVersion: 2
         x: 12
@@ -288,15 +309,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c9ad21ff85d0a1f41bb2e22d1bd3761d
+      spriteID: 16870b959cb60634fa921c9a9f1da70a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ENM_Effects01_10
+      name: ENM_Effects01_11
       rect:
         serializedVersion: 2
         x: 21
@@ -308,15 +329,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3b4bcc5b83222924a8aac7a58c09bd5e
+      spriteID: 4a88334a8c27d194cbfbf86e6ac84fab
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ENM_Effects01_11
+      name: ENM_Effects01_12
       rect:
         serializedVersion: 2
         x: 31
@@ -328,9 +349,9 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 960d5ec267a5f5e4492c9768d4c4e7da
+      spriteID: 11e826d01ed56e04e93ab35a3c589450
       vertices: []
       indices: 
       edges: []
@@ -338,7 +359,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 85ca6944907a690478cff18e1d2c6130
     vertices: []
     indices: 
     edges: []

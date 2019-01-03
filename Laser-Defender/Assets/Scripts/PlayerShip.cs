@@ -19,7 +19,6 @@ public class PlayerShip : MonoBehaviour {
     [SerializeField] float shootDelay = 0.30f;
     [SerializeField] List<GameObject> plasmaBalls;
     [SerializeField] GameObject destructor;
-    [SerializeField] float shotVolume = 0.1f;
 
     [Header("Effects")]
     [SerializeField] Sprite leftTurn;
@@ -35,6 +34,8 @@ public class PlayerShip : MonoBehaviour {
     GameObject shield;
     HealthBarUI healthBar;
     BigBombUI bigBombUI;
+    AudioClip shotSound;
+    DamageDealer damageDealer;
 
     //state variables
     int currentBigBombsLeft;
@@ -58,6 +59,7 @@ public class PlayerShip : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        bigBombUI = FindObjectOfType<BigBombUI>();
         EventSystem.current.SetSelectedGameObject(null);
         healthBar = FindObjectOfType<HealthBarUI>();
         shield = Instantiate(shieldPrefab, new Vector3(-50, -50, -1), Quaternion.identity);
@@ -75,11 +77,10 @@ public class PlayerShip : MonoBehaviour {
     }
 
     private void GetMoveBoundaries() {
-        Camera camera = Camera.main;
-        minX = camera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + paddingLeftRight;
-        maxX = camera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - paddingLeftRight;
-        minY = camera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + paddingBottom;
-        maxY = camera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - paddingTop;
+        minX = -3.25f;
+        maxX = 3.25f;
+        minY = -4.5f;
+        maxY = 3f;
     }
 
     // Update is called once per frame
@@ -97,23 +98,26 @@ public class PlayerShip : MonoBehaviour {
 
     private void Shoot() {
         if (Input.GetButton("Fire1") && Time.time > timeBuffer) {
+            damageDealer = plasmaBalls[currentBulletSizeIndex].GetComponent<DamageDealer>();
+            AudioSource.PlayClipAtPoint(damageDealer.GetSound(), Camera.main.transform.position, damageDealer.GetVolume());
             timeBuffer = Time.time + shootDelay;
             if (numberOfBullets >= 1) {
                 GameObject projectile1 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
                 projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
             }
             if (numberOfBullets >= 5) {
-                GameObject projectile2 = Instantiate(plasmaBalls[currentBulletSizeIndex], transform.position, Quaternion.identity);
-                projectile2.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 20, projectileSpeed);
-                GameObject projectile3 = Instantiate(plasmaBalls[currentBulletSizeIndex], transform.position, Quaternion.identity);
-                projectile3.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 20, projectileSpeed);
+                GameObject projectile2 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+                projectile2.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 20, projectileSpeed);
+                GameObject projectile3 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+                projectile3.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 20, projectileSpeed);
             }
-            if (numberOfBullets >= 9) {
-                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletSizeIndex], transform.position, Quaternion.identity);
-                projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 10, projectileSpeed);
-                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletSizeIndex], transform.position, Quaternion.identity);
-                projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 10, projectileSpeed);
-            }
+            //having 5 rounds shoot at once seems overkill for now commented out in case I want it back later
+            //if (numberOfBullets >= 9) {
+            //    GameObject projectile4 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+            //    projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 10, projectileSpeed);
+            //    GameObject projectile5 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+            //    projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 10, projectileSpeed);
+            //}
         }
         if (Input.GetButtonDown("Fire2")) {
             if (currentBigBombsLeft > 0) {
@@ -126,6 +130,8 @@ public class PlayerShip : MonoBehaviour {
         bigBombUI.RemoveAmmo();
         currentBigBombsLeft -= 1;
         GameObject bigBomb = Instantiate(destructor, new Vector3(0, -5f, 0), Quaternion.identity);
+        damageDealer = bigBomb.GetComponent<DamageDealer>();
+        AudioSource.PlayClipAtPoint(damageDealer.GetSound(), Camera.main.transform.position, damageDealer.GetVolume());
         bigBomb.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10);
     }
 
@@ -169,7 +175,7 @@ public class PlayerShip : MonoBehaviour {
             currentBigBombsLeft = maxBibBombs;
         }
         else {
-            FindObjectOfType<BigBombUI>().FillAmmoBar(1);
+            bigBombUI.FillAmmoBar(1);
         }
     }
 
@@ -191,8 +197,8 @@ public class PlayerShip : MonoBehaviour {
 
     public void IncreaseBulletQuantity() {
         numberOfBullets += 4;
-        if (numberOfBullets > 12) {
-            numberOfBullets = 12;
+        if (numberOfBullets > 7) {
+            numberOfBullets = 7;
         }
     }
 

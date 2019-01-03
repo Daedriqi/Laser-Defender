@@ -47,5 +47,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a20050eff6a8ae54698453e6ed4ff2c4, type: 2}
   - {fileID: 11400000, guid: 5409eb79dd988314191d8fca3c4e512b, type: 2}
   - {fileID: 11400000, guid: 3414fd12764b3124b85758cb3d0306b4, type: 2}
+  - {fileID: 11400000, guid: 50728689f0afede46af9a70ce549b956, type: 2}
+  - {fileID: 11400000, guid: 36b1e5a7a331be6409dac4e608870282, type: 2}
+  - {fileID: 11400000, guid: 2120ca5688944314cb2b7a482a19619b, type: 2}
   waveContainerPrefab: {fileID: 1243202622444823701, guid: 65e4623ce46ece14d882e7a8087a637d,
     type: 3}
+  roundsToBossFight: 3
+  specialtySpawns:
+  - {fileID: 4543075638559896638, guid: 12365f2f5e5f7dc44939210e49f6d120, type: 3}
+  - {fileID: 4543075638559896638, guid: a0cb585c7ff2cb846a31e176646eb675, type: 3}
+  - {fileID: 4543075638559896638, guid: 8c9d29e294dd56d4198cbb854d1cafee, type: 3}
+  bosses:
+  - {fileID: 4543075638559896638, guid: a48d5ad132a9f204594bbd7350e824b3, type: 3}
+  - {fileID: 4543075638559896638, guid: 1db3eb4ddc03e97498a7b1b242918ad6, type: 3}
+  - {fileID: 4543075638559896638, guid: b4f7d35e61a4e4c4ebd98583bb01daac, type: 3}
+  - {fileID: 4543075638559896638, guid: c219702444087934c8f30ed0a29097ef, type: 3}
+  - {fileID: 4543075638559896638, guid: d824909eab3a753479f052d11e8e8d07, type: 3}
+  - {fileID: 4543075638559896638, guid: fd955a2b7292de7459d8ade95e2af6d8, type: 3}

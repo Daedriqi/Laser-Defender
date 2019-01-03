@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb60b2993f9a91488bd65fe80f79604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 999999999
+  damage: 350
   shootSound: {fileID: 8300000, guid: 889d036bff869254b8b2b90f64e9c57c, type: 3}
   shootVolume: 0.75
 --- !u!70 &4143889055493395358
@@ -84,7 +84,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9512751, y: 1.0000014}
   m_Direction: 1
 --- !u!1001 &1255456737
 PrefabInstance:
