@@ -106,17 +106,16 @@ public class PlayerShip : MonoBehaviour {
                 projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
             }
             if (numberOfBullets >= 5) {
-                GameObject projectile2 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
-                projectile2.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 20, projectileSpeed);
-                GameObject projectile3 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
-                projectile3.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 20, projectileSpeed);
+                GameObject projectile2 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x + 0.25f, transform.position.y + 0.25f, 0), Quaternion.identity);
+                projectile2.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+                GameObject projectile3 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x - 0.25f, transform.position.y + 0.25f, 0), Quaternion.identity);
+                projectile3.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
             }
-            //having 5 rounds shoot at once seems overkill for now commented out in case I want it back later
             if (numberOfBullets >= 9) {
-                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
-                projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 10, projectileSpeed);
-                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
-                projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 10, projectileSpeed);
+                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x + 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, -40));
+                projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed * 2, projectileSpeed);
+                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x - 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, 40));
+                projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed * 2, projectileSpeed);
             }
         }
         if (Input.GetButtonDown("Fire2")) {

@@ -85,7 +85,7 @@ public class EnemyShip : MonoBehaviour {
                 MakeDamagable();
             }
         }
-        if (canShoot) {
+        if (canShoot && game.GetGameState() == Game.GameState.Playing) {
             shootOnDelay = StartCoroutine(ShootOnDelay());
         }
     }

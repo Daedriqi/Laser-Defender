@@ -105,13 +105,13 @@ public class Game : MonoBehaviour {
         if (newState == GameState.Playing) {
             healthBarUIObject.SetActive(true);
             scoreboard.text = "Score: " + score;
-            Time.timeScale = 1;
+            gameSpeed = 1;
             statusText.text = "";
             ButtonsShowHide(false);
         }
         if (newState == GameState.Paused) {
             ButtonsShowHide(true);
-            Time.timeScale = 0;
+            gameSpeed = 0;
             statusText.text = "Paused";
             playButtonText.text = "Restart";
         }
@@ -191,7 +191,7 @@ public class Game : MonoBehaviour {
         audioSource.clip = gameMusic;
         audioSource.Play();
         currentHealthScaling = 0;
-        Time.timeScale = 1;
+        gameSpeed = 1;
         statusText.text = "";
         scoreboard.text = "Score: 0";
         SceneManager.LoadScene("Game");
@@ -202,7 +202,7 @@ public class Game : MonoBehaviour {
     }
 
     public void SetTimeScale(float scale) {
-        Time.timeScale = scale;
+        gameSpeed = scale;
     }
 
     public enum GameState {
