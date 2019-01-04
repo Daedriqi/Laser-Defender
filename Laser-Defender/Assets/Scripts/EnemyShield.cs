@@ -17,7 +17,7 @@ public class EnemyShield : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "PlayerBullet") {
-            Destroy(collision);
+            Destroy(collision.gameObject);
             shieldHits--;
         }
         if (collision.gameObject.tag == "Destructor") {

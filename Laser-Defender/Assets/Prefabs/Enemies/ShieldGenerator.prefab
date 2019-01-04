@@ -157,7 +157,7 @@ MonoBehaviour:
   specialtyPath: {fileID: 3563551495461721868, guid: a70b84f810439b1419f983e38ab3ed97,
     type: 3}
   enemySpeed: 1
-  shieldForEnemies: {fileID: 5490290133560728547, guid: 7f41890e3fa7f2e41b90c12ed7c9aea3,
+  shieldForEnemies: {fileID: 1859825476978986860, guid: 9d8e5dfdf59396c40971acf85b94aa43,
     type: 3}
   bombDelayMin: 0
   bombDelayMax: 0

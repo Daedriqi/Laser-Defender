@@ -116,6 +116,7 @@ MonoBehaviour:
   points: 75000
   specialtyTypeEnemy: 0
   isBoss: 1
+  shieldScale: {x: 6, y: 6, z: 0}
   shootrandomRangeMin: 1
   shootRandomRange: 2
   enemyProjectile: {fileID: 723157152322537833, guid: ce99785a1e95e9346928942a0bd49b41,
