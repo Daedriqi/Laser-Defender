@@ -11,6 +11,7 @@ public class EnemyShip : MonoBehaviour {
     [SerializeField] int points = 125;
     [SerializeField] bool specialtyTypeEnemy = false;
     [SerializeField] bool isBoss = false;
+    [SerializeField] Vector3 shieldScale = new Vector3(2, 2, 0);
 
     [Header("Projectiles")]
     [SerializeField] float shootrandomRangeMin = 0.5f;
@@ -121,6 +122,10 @@ public class EnemyShip : MonoBehaviour {
 
     public void SetShielded() {
         isShielded = true;
+    }
+
+    public Vector3 GetShieldScale() {
+        return shieldScale;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

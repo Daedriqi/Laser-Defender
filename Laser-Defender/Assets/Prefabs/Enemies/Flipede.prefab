@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1901254745
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 89badffc9e158cc469ddaf17d1b56248, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -110,11 +110,16 @@ MonoBehaviour:
   enemyHealth: 3
   points: 135
   specialtyTypeEnemy: 0
+  isBoss: 0
+  shieldScale: {x: 1.75, y: 1.75, z: 0}
   shootrandomRangeMin: 0.5
   shootRandomRange: 4
   enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
     type: 3}
   projectileSpeed: 5
+  projectileQuantity: 1
+  homingShot: 0
+  addedDamage: 0
   explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
 --- !u!58 &7830412924541256884

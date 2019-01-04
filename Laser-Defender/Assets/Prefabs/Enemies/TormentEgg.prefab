@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1901254745
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8deed2da4ef233b4fbe0b3cf7c540468, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   points: 300
   specialtyTypeEnemy: 1
   isBoss: 0
+  shieldScale: {x: 2, y: 2, z: 0}
   shootrandomRangeMin: 2
   shootRandomRange: 3
   enemyProjectile: {fileID: 979847751105616194, guid: bb52bb71c7f8fef4d9154dce72d6595a,

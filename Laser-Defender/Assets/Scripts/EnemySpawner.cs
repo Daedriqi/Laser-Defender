@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour {
 
     int waveIndex = 0;
     int waveCount = 0;
-    int levelIndex = 0;
+    int levelIndex = 3;
     int currentRound = 0;
     bool nextWave = true;
     bool bossFight = false;

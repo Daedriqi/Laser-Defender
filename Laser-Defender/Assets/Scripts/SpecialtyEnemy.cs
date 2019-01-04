@@ -204,6 +204,7 @@ public class SpecialtyEnemy : MonoBehaviour {
             if (!enemy.IsSpecialtyType() && !enemy.GetIsShielded()) {
                 Vector3 shieldPos = new Vector3(enemy.transform.position.x, enemy.transform.position.y, 5);
                 GameObject shield = Instantiate(shieldForEnemies, enemy.transform.position, Quaternion.identity);
+                shield.transform.localScale = enemy.GetShieldScale();
                 shield.transform.parent = enemy.transform;
                 enemy.SetShielded();
             }
