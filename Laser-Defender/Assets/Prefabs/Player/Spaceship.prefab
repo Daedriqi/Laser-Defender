@@ -49,15 +49,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b74d092e2271242b00e63f24fd6884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipSpeed: 2.5
   playerHealth: 150
   shieldCapacity: 150
   damageImmunityTime: 1
   shieldPrefab: {fileID: 5490290133560728547, guid: 41d368147cd2d9e4da8661779515d3f9,
     type: 3}
-  bigBombsCount: 3
+  shipSpeed: 2.5
+  minXPos: 0
+  maxXPos: 0
+  minYPos: 0
+  maxYPos: 0
   projectileSpeed: 15
-  shootDelay: 0.3
   plasmaBalls:
   - {fileID: 1363376297, guid: e5c2d54c571ff7d4fa92f6c22f4a9232, type: 3}
   - {fileID: 1363376297, guid: 672512febf4677d488c432cb52cb1594, type: 3}
@@ -65,6 +67,14 @@ MonoBehaviour:
   - {fileID: 1363376297, guid: 712e540d6292bd64f8b52f54e6a39f71, type: 3}
   destructor: {fileID: 7628457572313487382, guid: b17b0b86e1bef5541981a68d4eec852b,
     type: 3}
+  maxBulletQuantity: 5
+  maxBulletPowerIndex: 3
+  minBulletDelay: 0.15
+  maxBigBombs: 3
+  defaultBulletPowerIndex: 0
+  defaultBulletQuantity: 1
+  defaultBigBombQuantity: 3
+  defaultShootDelay: 0.3
   leftTurn: {fileID: 21300012, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
   rightTurn: {fileID: 21300016, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
   deathExplosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
@@ -105,7 +115,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1098850335
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300014, guid: d8498c3b8e10cf947aa30703c5122b9d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

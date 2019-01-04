@@ -7,18 +7,30 @@ using UnityEngine.EventSystems;
 public class PlayerShip : MonoBehaviour {
     //configuration parameters
     [Header("Player")]
-    [SerializeField] float shipSpeed = 5f;
     [SerializeField] int playerHealth = 150;
     [SerializeField] float shieldCapacity = 150;
     [SerializeField] float damageImmunityTime = 2f;
     [SerializeField] GameObject shieldPrefab;
-    [SerializeField] int bigBombsCount = 3;
+
+    [Header("Movement")]
+    [SerializeField] float shipSpeed = 5f;
+    [SerializeField] float minXPos;
+    [SerializeField] float maxXPos;
+    [SerializeField] float minYPos;
+    [SerializeField] float maxYPos;
 
     [Header("Projectiles")]
     [SerializeField] float projectileSpeed = 15f;
-    [SerializeField] float shootDelay = 0.30f;
     [SerializeField] List<GameObject> plasmaBalls;
     [SerializeField] GameObject destructor;
+    [SerializeField] int maxBulletQuantity = 5;
+    [SerializeField] int maxBulletPowerIndex = 3;
+    [SerializeField] float minBulletDelay = 0.15f;
+    [SerializeField] int maxBigBombs = 3;
+    [SerializeField] int defaultBulletPowerIndex = 0;
+    [SerializeField] int defaultBulletQuantity = 1;
+    [SerializeField] int defaultBigBombQuantity = 3;
+    [SerializeField] float defaultShootDelay = 0.3f;
 
     [Header("Effects")]
     [SerializeField] Sprite leftTurn;
@@ -38,24 +50,19 @@ public class PlayerShip : MonoBehaviour {
     DamageDealer damageDealer;
 
     //state variables
+    float currentShieldLeft;
+    float currentShootDelay;
     int currentBigBombsLeft;
     int currentHealthLeft;
-    float currentShieldLeft;
-    int currentBulletSizeIndex = 0;
-    int maxBibBombs = 3;
+    int currentBulletPowerIndex;
     bool shieldUp = false;
-    [SerializeField] bool immuneToDamage = false;
-    int defaultNumberOfBullets = 1;
+    bool immuneToDamage = false;
     int numberOfBullets = 1;
-    float defaultShootDelay;
     float timeBuffer;
     float paddingLeftRight = 0.35f;
     float paddingTop = 4f;
     float paddingBottom = 0.5f;
-    float minX;
-    float maxX;
-    float minY;
-    float maxY;
+
 
     // Start is called before the first frame update
     void Start() {
@@ -64,23 +71,23 @@ public class PlayerShip : MonoBehaviour {
         healthBar = FindObjectOfType<HealthBarUI>();
         shield = Instantiate(shieldPrefab, new Vector3(-50, -50, -1), Quaternion.identity);
         currentShieldLeft = shieldCapacity;
-        defaultShootDelay = shootDelay;
         currentHealthLeft = playerHealth;
-        currentBigBombsLeft = bigBombsCount;
+        currentShootDelay = defaultShootDelay;
+        currentBigBombsLeft = defaultBigBombQuantity;
+        currentBulletPowerIndex = defaultBulletPowerIndex;
         game = GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         defaultSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         GetMoveBoundaries();
         bigBombUI = FindObjectOfType<BigBombUI>();
-        bigBombUI.SetStartingXPos();
         bigBombUI.FillAmmoBar(currentBigBombsLeft);
     }
 
     private void GetMoveBoundaries() {
-        minX = -3f;
-        maxX = 3f;
-        minY = -4.5f;
-        maxY = 3f;
+        minXPos = -3f;
+        maxXPos = 3f;
+        minYPos = -4.5f;
+        maxYPos = 3f;
     }
 
     // Update is called once per frame
@@ -98,23 +105,35 @@ public class PlayerShip : MonoBehaviour {
 
     private void Shoot() {
         if (Input.GetButton("Fire1") && Time.time > timeBuffer) {
-            damageDealer = plasmaBalls[currentBulletSizeIndex].GetComponent<DamageDealer>();
+            damageDealer = plasmaBalls[currentBulletPowerIndex].GetComponent<DamageDealer>();
             AudioSource.PlayClipAtPoint(damageDealer.GetSound(), Camera.main.transform.position, damageDealer.GetVolume());
-            timeBuffer = Time.time + shootDelay;
+            timeBuffer = Time.time + currentShootDelay;
             if (numberOfBullets >= 1) {
-                GameObject projectile1 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+                GameObject projectile1 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
                 projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
             }
-            if (numberOfBullets >= 5) {
-                GameObject projectile2 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x + 0.25f, transform.position.y + 0.25f, 0), Quaternion.identity);
+            if (numberOfBullets >= 3) {
+                GameObject projectile2 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x + 0.25f, transform.position.y + 0.25f, 0), Quaternion.identity);
                 projectile2.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
-                GameObject projectile3 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x - 0.25f, transform.position.y + 0.25f, 0), Quaternion.identity);
+                GameObject projectile3 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x - 0.25f, transform.position.y + 0.25f, 0), Quaternion.identity);
                 projectile3.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
             }
-            if (numberOfBullets >= 9) {
-                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x + 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, -40));
+            if (numberOfBullets >= 5) {
+                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x + 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, -40));
                 projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed * 2, projectileSpeed);
-                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x - 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, 40));
+                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x - 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, 40));
+                projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed * 2, projectileSpeed);
+            }
+            if (numberOfBullets >= 7) {
+                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x + 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, -40));
+                projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed * 2, projectileSpeed);
+                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x - 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, 40));
+                projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed * 2, projectileSpeed);
+            }
+            if (numberOfBullets >= 9) {
+                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x + 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, -40));
+                projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed * 2, projectileSpeed);
+                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x - 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, 40));
                 projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed * 2, projectileSpeed);
             }
         }
@@ -136,7 +155,7 @@ public class PlayerShip : MonoBehaviour {
 
     private void ShieldUp() {
         if (Input.GetButton("ShieldUp") && currentShieldLeft > 0) {
-            UpdatePlayerShield(-1.5f);
+            UpdatePlayerShield(-0.5f);
             shield.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
             shieldUp = true;
             if (currentShieldLeft <= 0) {
@@ -163,17 +182,14 @@ public class PlayerShip : MonoBehaviour {
     }
 
     public void IncreaseBulletSize() {
-        if (currentBulletSizeIndex < plasmaBalls.Count - 1) {
-            currentBulletSizeIndex++;
+        if (currentBulletPowerIndex < maxBulletPowerIndex && currentBulletPowerIndex < plasmaBalls.Count) {
+            currentBulletPowerIndex++;
         }
     }
 
     public void UpdateBigBlastAmmo() {
-        currentBigBombsLeft++;
-        if (currentBigBombsLeft > maxBibBombs) {
-            currentBigBombsLeft = maxBibBombs;
-        }
-        else {
+        if (currentBigBombsLeft < maxBigBombs) {
+            currentBigBombsLeft++;
             bigBombUI.FillAmmoBar(1);
         }
     }
@@ -195,17 +211,40 @@ public class PlayerShip : MonoBehaviour {
     }
 
     public void IncreaseBulletQuantity() {
-        numberOfBullets += 4;
-        if (numberOfBullets > 12) {
-            numberOfBullets = 12;
+        numberOfBullets += 2;
+        if (numberOfBullets > maxBulletQuantity) {
+            numberOfBullets = maxBulletQuantity;
         }
     }
 
     public void DecreaseShootDelay() {
-        shootDelay -= 0.05f;
-        if (shootDelay < 0.1f) {
-            shootDelay = 0.1f;
+        currentShootDelay -= 0.05f;
+        if (currentShootDelay < minBulletDelay) {
+            currentShootDelay = minBulletDelay;
         }
+    }
+
+    public void AddToMaxBulletQuantity() {
+        maxBulletQuantity++;
+    }
+
+    public void AddToMaxBulletPowerIndex() {
+        maxBulletPowerIndex++;
+    }
+
+    public void SubtractFromMinBulletDelay() {
+        minBulletDelay -= 0.05f;
+    }
+
+    public void AddToMaxBigBombs() {
+        maxBigBombs++;
+    }
+
+    public void ResetDefaultStats() {
+        maxBigBombs = defaultBigBombQuantity;
+        maxBulletPowerIndex = defaultBulletPowerIndex;
+        maxBulletQuantity = defaultBulletQuantity;
+        minBulletDelay = defaultShootDelay;
     }
 
     private void HandlePowerup(Collider2D collision) {
@@ -225,14 +264,14 @@ public class PlayerShip : MonoBehaviour {
     public IEnumerator DamagePlayer(int damage) {
         UpdatePlayerHealth(-damage);
         StartCoroutine(flashSprite());
-        if (numberOfBullets > defaultNumberOfBullets) {
+        if (numberOfBullets > defaultBulletQuantity) {
             numberOfBullets -= 1;
         }
-        if (currentBulletSizeIndex > 0) {
-            currentBulletSizeIndex--;
+        if (currentBulletPowerIndex > 0) {
+            currentBulletPowerIndex--;
         }
-        if (shootDelay < defaultShootDelay) {
-            shootDelay += 0.05f;
+        if (currentShootDelay < defaultShootDelay) {
+            currentShootDelay += 0.05f;
         }
         if (currentHealthLeft <= 0) {
             currentHealthLeft -= 9999999;
@@ -313,6 +352,6 @@ public class PlayerShip : MonoBehaviour {
         }
         float newXPos = transform.position.x + deltaX;
         float newYPos = transform.position.y + deltaY;
-        transform.position = new Vector2(Mathf.Clamp(newXPos, minX, maxX), Mathf.Clamp(newYPos, minY, maxY));
+        transform.position = new Vector2(Mathf.Clamp(newXPos, minXPos, maxXPos), Mathf.Clamp(newYPos, minYPos, maxYPos));
     }
 }

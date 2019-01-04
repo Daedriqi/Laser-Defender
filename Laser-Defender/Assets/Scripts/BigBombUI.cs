@@ -13,29 +13,28 @@ public class BigBombUI : MonoBehaviour {
 
     void Start() {
         game = FindObjectOfType<Game>();
-        currentXPos = startingXPos;
     }
 
     public void Update() {
 
     }
 
-    public void SetStartingXPos() {
-        currentXPos = startingXPos;
-    }
-
     public void FillAmmoBar(int numberToFill) {
-        for (int index = 1; index <= numberToFill; index++) {
-            currentXPos += 0.5f;
-            GameObject ammo = Instantiate(bombSprite);
+        if (transform.childCount == 0) {
+            currentXPos = startingXPos;
+            GameObject ammo = Instantiate(bombSprite, new Vector3(currentXPos, constantYPos, -1), Quaternion.identity);
             ammo.transform.parent = transform;
-            ammo.transform.position = new Vector3(currentXPos, constantYPos, -1);
+            numberToFill--;
+        }
+        for (int index = 1; index <= numberToFill; index++) {
+            currentXPos = transform.GetChild(transform.childCount - 1).position.x + 0.5f;
+            GameObject ammo = Instantiate(bombSprite, new Vector3(currentXPos, constantYPos, -1), Quaternion.identity);
+            ammo.transform.parent = transform;
         }
     }
 
     public void RemoveAmmo() {
         if (transform.childCount > 0) {
-            currentXPos -= 0.5f;
             Destroy(transform.GetChild(transform.childCount - 1).gameObject);
         }
     }

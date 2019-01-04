@@ -110,11 +110,15 @@ MonoBehaviour:
   enemyHealth: 15
   points: 135
   specialtyTypeEnemy: 0
-  shootrandomRangeMin: 0.5
-  shootRandomRange: 2.5
+  isBoss: 0
+  shootrandomRangeMin: 1.25
+  shootRandomRange: 3.5
   enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
     type: 3}
   projectileSpeed: 5
+  projectileQuantity: 1
+  homingShot: 0
+  addedDamage: 0
   explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
 --- !u!58 &7830412924541256884

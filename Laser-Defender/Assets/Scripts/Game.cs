@@ -152,7 +152,7 @@ public class Game : MonoBehaviour {
     }
 
     private void GameOver() {
-        Time.timeScale = 0;
+        SetTimeScale(0);
         quitButton.SetActive(true);
         playButton.SetActive(true);
         settingsButton.SetActive(true);
@@ -180,6 +180,7 @@ public class Game : MonoBehaviour {
         StopAllCoroutines();
         levelIndex = 0;
         score = 0;
+        playerShip.ResetDefaultStats();
         SetGameState(GameState.Playing);
         healthBarUIObject.SetActive(true);
         healthBarUI.UpdateHealthBar(300);
