@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BigBombUI : MonoBehaviour {
     [SerializeField] GameObject bombSprite;
-    [SerializeField] float startingXPos = -2.5f;
+    [SerializeField] float startingXPos = -3.25f;
     [SerializeField] float constantYPos = 4.25f;
 
     Game game;
@@ -26,17 +26,17 @@ public class BigBombUI : MonoBehaviour {
 
     public void FillAmmoBar(int numberToFill) {
         for (int index = 1; index <= numberToFill; index++) {
+            currentXPos += 0.5f;
             GameObject ammo = Instantiate(bombSprite);
             ammo.transform.parent = transform;
             ammo.transform.position = new Vector3(currentXPos, constantYPos, -1);
-            currentXPos += 0.5f;
         }
     }
 
     public void RemoveAmmo() {
         if (transform.childCount > 0) {
-            Destroy(transform.GetChild(transform.childCount - 1).gameObject);
             currentXPos -= 0.5f;
+            Destroy(transform.GetChild(transform.childCount - 1).gameObject);
         }
     }
 }

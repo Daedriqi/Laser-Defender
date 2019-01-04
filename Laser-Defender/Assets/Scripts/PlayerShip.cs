@@ -44,7 +44,7 @@ public class PlayerShip : MonoBehaviour {
     int currentBulletSizeIndex = 0;
     int maxBibBombs = 3;
     bool shieldUp = false;
-    bool immuneToDamage = false;
+    [SerializeField] bool immuneToDamage = false;
     int defaultNumberOfBullets = 1;
     int numberOfBullets = 1;
     float defaultShootDelay;
@@ -77,8 +77,8 @@ public class PlayerShip : MonoBehaviour {
     }
 
     private void GetMoveBoundaries() {
-        minX = -3.25f;
-        maxX = 3.25f;
+        minX = -3f;
+        maxX = 3f;
         minY = -4.5f;
         maxY = 3f;
     }
@@ -112,12 +112,12 @@ public class PlayerShip : MonoBehaviour {
                 projectile3.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 20, projectileSpeed);
             }
             //having 5 rounds shoot at once seems overkill for now commented out in case I want it back later
-            //if (numberOfBullets >= 9) {
-            //    GameObject projectile4 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
-            //    projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 10, projectileSpeed);
-            //    GameObject projectile5 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
-            //    projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 10, projectileSpeed);
-            //}
+            if (numberOfBullets >= 9) {
+                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+                projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 10, projectileSpeed);
+                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletSizeIndex], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+                projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed / 10, projectileSpeed);
+            }
         }
         if (Input.GetButtonDown("Fire2")) {
             if (currentBigBombsLeft > 0) {
@@ -197,8 +197,8 @@ public class PlayerShip : MonoBehaviour {
 
     public void IncreaseBulletQuantity() {
         numberOfBullets += 4;
-        if (numberOfBullets > 7) {
-            numberOfBullets = 7;
+        if (numberOfBullets > 12) {
+            numberOfBullets = 12;
         }
     }
 

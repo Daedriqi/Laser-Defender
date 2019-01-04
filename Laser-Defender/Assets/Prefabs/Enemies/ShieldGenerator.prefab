@@ -95,14 +95,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45d2065aac0e2a40b588f74f226b1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 150
+  enemyHealth: 500
   points: 200
   specialtyTypeEnemy: 1
+  isBoss: 0
   shootrandomRangeMin: 99999
   shootRandomRange: 99999
   enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
     type: 3}
   projectileSpeed: 0
+  projectileQuantity: 1
+  homingShot: 0
+  addedDamage: 0
   explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
 --- !u!58 &7830412924541256884
@@ -148,9 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3fa679912b2c14cafa1d9e0f7e187e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   specialtyPath: {fileID: 3563551495461721868, guid: a70b84f810439b1419f983e38ab3ed97,
     type: 3}
   enemySpeed: 1
   shieldForEnemies: {fileID: 5490290133560728547, guid: 7f41890e3fa7f2e41b90c12ed7c9aea3,
     type: 3}
+  bombDelayMin: 0
+  bombDelayMax: 0

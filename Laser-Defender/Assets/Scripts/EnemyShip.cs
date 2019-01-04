@@ -46,7 +46,7 @@ public class EnemyShip : MonoBehaviour {
     }
 
     private IEnumerator ShootOnDelay() {
-        if (game.GetGameState() == Game.GameState.Playing) {
+        if (game.GetGameState() == Game.GameState.Playing && !specialtyTypeEnemy) {
             canShoot = false;
             randomWaitTime = UnityEngine.Random.Range(shootrandomRangeMin, shootRandomRange);
             yield return new WaitForSeconds(randomWaitTime);
@@ -92,6 +92,14 @@ public class EnemyShip : MonoBehaviour {
 
     public int GetHealth() {
         return currentHitsLeft;
+    }
+
+    public GameObject GetProjectile() {
+        return enemyProjectile;
+    }
+
+    public float GetProjectileSpeed() {
+        return projectileSpeed;
     }
 
     public void MakeDamagable() {

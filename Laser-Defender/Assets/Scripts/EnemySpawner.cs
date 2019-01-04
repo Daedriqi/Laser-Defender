@@ -13,7 +13,6 @@ public class EnemySpawner : MonoBehaviour {
     int waveIndex = 0;
     int waveCount = 0;
     int levelIndex = 0;
-    int specialSpawnIndex = 0;
     int currentRound = 0;
     bool nextWave = true;
     bool bossFight = false;
@@ -64,9 +63,6 @@ public class EnemySpawner : MonoBehaviour {
         if (waveIndex >= waveConfigs.Count - 1) {
             waveIndex = -1;
         }
-        if ((levelIndex + 1) % 2 == 0 && currentRound >= 2) {
-            SpawnSpecialtyWave(waveToSpawn);
-        }
         waveIndex++;
         yield return new WaitForSeconds((waveToSpawn.GetTimeBetweenSpawns() * waveToSpawn.GetEnemyCount()) + 1);
         if (!bossFight) {
@@ -85,6 +81,10 @@ public class EnemySpawner : MonoBehaviour {
                 waveCount = 0;
             }
             yield return new WaitForSeconds(15);
+        }
+        if (levelIndex >= 1) {
+            Debug.Log("Level index is now more than 1");
+            SpawnSpecialtyWave();
         }
         nextWave = true;
     }
@@ -120,14 +120,39 @@ public class EnemySpawner : MonoBehaviour {
         nextWave = true;
     }
 
-    private void SpawnSpecialtyWave(WaveConfig waveToSpawn) {
-        GameObject waveContainerObject = Instantiate(waveContainerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        waveContainerObject.name = "SpecialContainer";
-        GameObject specialEnemy = Instantiate(specialtySpawns[specialSpawnIndex], new Vector3(0, 5.75f, 0), Quaternion.identity);
-        WaveContainer waveContainer = waveContainerObject.GetComponent<WaveContainer>();
-        specialEnemy.transform.parent = waveContainerObject.transform;
-        EnemyShip enemyShip = specialEnemy.GetComponent<EnemyShip>();
-        enemyShip.SetHealthOnSpawn(game.GetHealthScaling());
+    public int GetLevelIndex() {
+        return levelIndex;
+    }
+
+    private void SpawnSpecialtyWave() {
+        GameObject waveContainerObject1 = Instantiate(waveContainerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        waveContainerObject1.name = "SpecialContainer";
+        GameObject specialEnemy1 = Instantiate(specialtySpawns[0], new Vector3(0, 5.75f, 0), Quaternion.identity);
+        WaveContainer waveContainer1 = waveContainerObject1.GetComponent<WaveContainer>();
+        specialEnemy1.transform.parent = waveContainerObject1.transform;
+        EnemyShip enemyShip1 = specialEnemy1.GetComponent<EnemyShip>();
+        enemyShip1.SetHealthOnSpawn(game.GetHealthScaling());
+
+        if (levelIndex >= 3) {
+            Debug.Log("Level index is now more than 3");
+            GameObject waveContainerObject2 = Instantiate(waveContainerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            waveContainerObject2.name = "SpecialContainer";
+            GameObject specialEnemy2 = Instantiate(specialtySpawns[1], new Vector3(0, 5.75f, 0), Quaternion.identity);
+            WaveContainer waveContainer2 = waveContainerObject2.GetComponent<WaveContainer>();
+            specialEnemy2.transform.parent = waveContainerObject2.transform;
+            EnemyShip enemyShip2 = specialEnemy2.GetComponent<EnemyShip>();
+            enemyShip2.SetHealthOnSpawn(game.GetHealthScaling());
+        }
+        if (levelIndex >= 5) {
+            Debug.Log("Level index is now more than 1");
+            GameObject waveContainerObject3 = Instantiate(waveContainerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            waveContainerObject3.name = "SpecialContainer";
+            GameObject specialEnemy3 = Instantiate(specialtySpawns[2], new Vector3(0, 5.75f, 0), Quaternion.identity);
+            WaveContainer waveContainer3 = waveContainerObject3.GetComponent<WaveContainer>();
+            specialEnemy3.transform.parent = waveContainerObject3.transform;
+            EnemyShip enemyShip3 = specialEnemy3.GetComponent<EnemyShip>();
+            enemyShip3.SetHealthOnSpawn(game.GetHealthScaling());
+        }
     }
 
     private IEnumerator SpawnAllEnemiesForPath(List<Transform> path, WaveConfig waveToSpawn, GameObject waveContainer) {

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6306833766407009803}
   - component: {fileID: 2201130751873404202}
   - component: {fileID: 3969120593795684787}
-  - component: {fileID: 3618721017374336633}
   - component: {fileID: 6622551311055520852}
   - component: {fileID: 8783522860568847664}
   - component: {fileID: 1664531695993308577}
@@ -97,22 +96,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossName: 0
-  bossSpeed: 3
+  bossSpeed: 2
   startingPoint: {x: 0, y: 3, z: 0}
   path: {fileID: 3563551495461721868, guid: 319ceb56e65e1fd4eb4b38ae2b842d16, type: 3}
   powerUps: []
---- !u!114 &3618721017374336633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4543075638559896638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603ff9cb145945d418cffc4ef0f971ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6622551311055520852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 20000
-  points: 135
+  points: 100000
   specialtyTypeEnemy: 0
   isBoss: 1
   shootrandomRangeMin: 1

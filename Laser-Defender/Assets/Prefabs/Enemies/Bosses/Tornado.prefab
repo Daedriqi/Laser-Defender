@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 17500
-  points: 4500
+  points: 75000
   specialtyTypeEnemy: 0
   isBoss: 1
   shootrandomRangeMin: 1
@@ -126,7 +126,6 @@ MonoBehaviour:
   addedDamage: 25
   explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
-  currentHitsLeft: 0
 --- !u!114 &8783522860568847664
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,10 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 4543075638559896638, guid: 5dfe11bcbeb41c74abb67bca5141eab4, type: 3}
   - {fileID: 4543075638559896638, guid: f0abfdd341bfc824a86b23a8eb7234a6, type: 3}
+  - {fileID: 4543075638559896638, guid: 7c2825918397f4042a3d060ced71763f, type: 3}
+  - {fileID: 4543075638559896638, guid: 5c38abae2c917aa438424ecce6015f39, type: 3}
+  - {fileID: 2567764365211750668, guid: bb313ac27179d4a41bc047081c60054d, type: 3}
+  - {fileID: 4543075638559896638, guid: 4b2b6808e649c4c4190e1d20c1a2cb98, type: 3}
   powerUps:
   - {fileID: 125963951, guid: 59335f64696233546bd43afb712503ac, type: 3}
   - {fileID: 6830389332653465972, guid: 2c62b8c267cecda47bc9690b8b8b4f06, type: 3}

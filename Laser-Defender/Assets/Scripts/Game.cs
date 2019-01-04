@@ -55,15 +55,12 @@ public class Game : MonoBehaviour {
         audioSource = gameObject.GetComponent<AudioSource>();
         SetGameState(GameState.Menu);
         playerShip = FindObjectOfType<PlayerShip>();
-        bigBombUI = FindObjectOfType<BigBombUI>();
-        if (bigBombUI != null) {
-            bigBombUI.RemoveAmmo();
-        }
     }
 
     // Update is called once per frame
     void Update() {
         PauseGame();
+        Time.timeScale = gameSpeed;
     }
 
     private void PauseGame() {
@@ -198,11 +195,6 @@ public class Game : MonoBehaviour {
         statusText.text = "";
         scoreboard.text = "Score: 0";
         SceneManager.LoadScene("Game");
-        bigBombUI = FindObjectOfType<BigBombUI>();
-        if (bigBombUI != null) {
-            bigBombUI.RemoveAmmo();
-            bigBombUI.FillAmmoBar(3);
-        }
     }
 
     public GameState GetGameState() {
