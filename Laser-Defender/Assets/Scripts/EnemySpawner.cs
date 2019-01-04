@@ -14,8 +14,8 @@ public class EnemySpawner : MonoBehaviour {
     int waveCount = 0;
     int levelIndex = 0;
     int specialSpawnIndex = 0;
-    int currentRound = 3;
-    bool nextWave = false;
+    int currentRound = 0;
+    bool nextWave = true;
     bool bossFight = false;
     int bossIndex = 0;
     WaveConfig currentWave;
@@ -28,15 +28,21 @@ public class EnemySpawner : MonoBehaviour {
     void Start() {
         game = FindObjectOfType<Game>();
         currentWave = waveConfigs[0];
-        spawnAllEnemiesInWave = StartCoroutine(SpawnAllEnemiesInWave(currentWave));
     }
 
     // Update is called once per frame
     void Update() {
-        if (nextWave) {
+        if (game == null) {
+            game = FindObjectOfType<Game>();
+        }
+        if (nextWave && game.GetGameState() == Game.GameState.Playing) {
             nextWave = false;
-            StopCoroutine(spawnAllEnemiesInWave);
-            StopCoroutine(spawnAllEnemiesForPath);
+            if (spawnAllEnemiesForPath != null) {
+                StopCoroutine(spawnAllEnemiesForPath);
+            }
+            if (spawnAllEnemiesInWave != null) {
+                StopCoroutine(spawnAllEnemiesInWave);
+            }
             spawnAllEnemiesInWave = StartCoroutine(SpawnAllEnemiesInWave(waveConfigs[waveIndex]));
         }
         if (game.GetGameState() == Game.GameState.GameOver) {
@@ -63,34 +69,55 @@ public class EnemySpawner : MonoBehaviour {
         }
         waveIndex++;
         yield return new WaitForSeconds((waveToSpawn.GetTimeBetweenSpawns() * waveToSpawn.GetEnemyCount()) + 1);
-        if (waveCount >= 5) {
-            game.RoundComplete();
-            currentRound++;
-            waveCount = 0;
+        if (!bossFight) {
+            if (waveCount >= 5) {
+                game.RoundComplete();
+                currentRound++;
+                waveCount = 0;
+            }
+            if (currentRound >= roundsToBossFight) {
+                bossFight = true;
+                BossFight();
+            }
         }
-        if (currentRound >= roundsToBossFight) {
-            currentRound = 0;
-            levelIndex++;
-            bossFight = true;
-            bossFightRoutine = StartCoroutine(BossFight());
-            yield return new WaitWhile(() => bossFight);
+        if (bossFight) {
+            if (waveCount >= 5) {
+                waveCount = 0;
+            }
+            yield return new WaitForSeconds(15);
         }
         nextWave = true;
     }
 
-    private IEnumerator BossFight() {
-        GameObject boss = Instantiate(bosses[bossIndex], new Vector3(0, 3.5f, 0), Quaternion.identity);
+    private void BossFight() {
+        GameObject boss = Instantiate(bosses[bossIndex], new Vector3(0, 6.5f, 0), Quaternion.identity);
         GameObject waveContainerObject = Instantiate(waveContainerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         waveContainerObject.name = "BossContainer";
         WaveContainer waveContainer = waveContainerObject.GetComponent<WaveContainer>();
         boss.transform.parent = waveContainerObject.transform;
         EnemyShip bossShip = boss.GetComponent<EnemyShip>();
         bossShip.SetHealthOnSpawn(0);
-        yield return null;
     }
 
-    public bool BossSpawned() {
-        return bossFight;
+    public void BossDead() {
+        StopCoroutine(spawnAllEnemiesInWave);
+        StopCoroutine(spawnAllEnemiesForPath);
+        bossFight = false;
+        if (!game) {
+            game = FindObjectOfType<Game>();
+        }
+        game.PlayGameMusic();
+        currentRound = 0;
+        waveCount = 0;
+        waveIndex = 0;
+        levelIndex++;
+        bossIndex++;
+        StartCoroutine(BreakTime());
+    }
+
+    private IEnumerator BreakTime() {
+        yield return new WaitForSeconds(5);
+        nextWave = true;
     }
 
     private void SpawnSpecialtyWave(WaveConfig waveToSpawn) {

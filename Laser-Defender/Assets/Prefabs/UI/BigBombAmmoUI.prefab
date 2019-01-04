@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombSprite: {fileID: 6997841146793311389, guid: 52ea525eb9569b84c9a2e7ffe53fa1b2,
     type: 3}
-  startingXPos: -2.5
+  startingXPos: -3.25
   constantYPos: 4.25

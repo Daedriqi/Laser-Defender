@@ -10,6 +10,7 @@ public class EnemyShip : MonoBehaviour {
     [SerializeField] int enemyHealth = 5;
     [SerializeField] int points = 125;
     [SerializeField] bool specialtyTypeEnemy = false;
+    [SerializeField] bool isBoss = false;
 
     [Header("Projectiles")]
     [SerializeField] float shootrandomRangeMin = 0.5f;
@@ -18,6 +19,7 @@ public class EnemyShip : MonoBehaviour {
     [SerializeField] float projectileSpeed = 2.5f;
     [SerializeField] int projectileQuantity = 1;
     [SerializeField] bool homingShot = false;
+    [SerializeField] int addedDamage = 0;
 
     [Header("Effects")]
     [SerializeField] GameObject explosionVFX;
@@ -44,28 +46,33 @@ public class EnemyShip : MonoBehaviour {
     }
 
     private IEnumerator ShootOnDelay() {
-        canShoot = false;
-        randomWaitTime = UnityEngine.Random.Range(shootrandomRangeMin, shootRandomRange);
-        yield return new WaitForSeconds(randomWaitTime);
-        Vector3 instantiatePos = new Vector3(transform.position.x, transform.position.y - 0.5f, 0);
-        GameObject projectile1 = Instantiate(enemyProjectile, instantiatePos, Quaternion.identity);
-        damageDealer = projectile1.GetComponent<DamageDealer>();
-        AudioSource.PlayClipAtPoint(damageDealer.GetSound(), Camera.main.transform.position, damageDealer.GetVolume());
-        if (homingShot) {
-            projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(player.transform.position.x - transform.position.x, -projectileSpeed);
+        if (game.GetGameState() == Game.GameState.Playing) {
+            canShoot = false;
+            randomWaitTime = UnityEngine.Random.Range(shootrandomRangeMin, shootRandomRange);
+            yield return new WaitForSeconds(randomWaitTime);
+            Vector3 instantiatePos = new Vector3(transform.position.x, transform.position.y - 0.5f, 0);
+            GameObject projectile1 = Instantiate(enemyProjectile, instantiatePos, Quaternion.identity);
+            damageDealer = projectile1.GetComponent<DamageDealer>();
+            damageDealer.SetDamage(addedDamage);
+            AudioSource.PlayClipAtPoint(damageDealer.GetSound(), Camera.main.transform.position, damageDealer.GetVolume());
+            if (homingShot) {
+                projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(player.transform.position.x - transform.position.x, -projectileSpeed);
+            }
+            else {
+                projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -projectileSpeed);
+            }
+            if (projectileQuantity > 2) {
+                GameObject projectile2 = Instantiate(enemyProjectile, instantiatePos, Quaternion.identity);
+                damageDealer = projectile2.GetComponent<DamageDealer>();
+                damageDealer.SetDamage(addedDamage);
+                projectile2.GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -projectileSpeed);
+                GameObject projectile3 = Instantiate(enemyProjectile, instantiatePos, Quaternion.identity);
+                damageDealer = projectile3.GetComponent<DamageDealer>();
+                damageDealer.SetDamage(addedDamage);
+                projectile3.GetComponent<Rigidbody2D>().velocity = new Vector2(1, -projectileSpeed);
+            }
+            canShoot = true;
         }
-        else {
-            projectile1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -projectileSpeed);
-        }
-        if (projectileQuantity > 2) {
-            GameObject projectile2 = Instantiate(enemyProjectile, instantiatePos, Quaternion.identity);
-            damageDealer = projectile2.GetComponent<DamageDealer>();
-            projectile2.GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -projectileSpeed);
-            GameObject projectile3 = Instantiate(enemyProjectile, instantiatePos, Quaternion.identity);
-            damageDealer = projectile3.GetComponent<DamageDealer>();
-            projectile3.GetComponent<Rigidbody2D>().velocity = new Vector2(1, -projectileSpeed);
-        }
-        canShoot = true;
     }
 
     // Update is called once per frame
@@ -81,6 +88,10 @@ public class EnemyShip : MonoBehaviour {
         if (canShoot) {
             shootOnDelay = StartCoroutine(ShootOnDelay());
         }
+    }
+
+    public int GetHealth() {
+        return currentHitsLeft;
     }
 
     public void MakeDamagable() {
@@ -114,14 +125,20 @@ public class EnemyShip : MonoBehaviour {
             if (currentHitsLeft <= 0) {
                 dead = true;
                 int score = game.AddToScore(points);
-                this.waveContainer.UpdateEnemiesDestroyed();
-                if (this.waveContainer.SpawnPowerUp()) {
-                    GameObject powerUp = Instantiate(waveContainer.GetWave().GetPowerUp(), transform.position, Quaternion.identity);
-                    powerUp.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
+                if (isBoss) {
+                    BossFight bossFight = FindObjectOfType<BossFight>();
+                    bossFight.DeathAnimation();
                 }
-                GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<TextMeshProUGUI>().text = score.ToString();
-                GameObject explosion = Instantiate(explosionVFX, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                else {
+                    this.waveContainer.UpdateEnemiesDestroyed();
+                    if (this.waveContainer.SpawnPowerUp()) {
+                        GameObject powerUp = Instantiate(waveContainer.GetWave().GetPowerUp(), transform.position, Quaternion.identity);
+                        powerUp.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
+                    }
+                    GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<TextMeshProUGUI>().text = score.ToString();
+                    GameObject explosion = Instantiate(explosionVFX, transform.position, Quaternion.identity);
+                    Destroy(gameObject);
+                }
             }
         }
     }

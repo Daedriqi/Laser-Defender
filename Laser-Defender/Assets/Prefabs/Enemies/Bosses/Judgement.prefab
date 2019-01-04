@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6306833766407009803}
   - component: {fileID: 2201130751873404202}
+  - component: {fileID: 3969120593795684787}
   - component: {fileID: 3618721017374336633}
   - component: {fileID: 6622551311055520852}
   - component: {fileID: 8783522860568847664}
@@ -69,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1901254745
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 87473c3a58b127648a2cbd8bee65d5af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -83,6 +84,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3969120593795684787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543075638559896638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e758e623d32c94f4bb802f7d4a7d0b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossName: 0
+  bossSpeed: 3
+  startingPoint: {x: 0, y: 3, z: 0}
+  path: {fileID: 3563551495461721868, guid: 319ceb56e65e1fd4eb4b38ae2b842d16, type: 3}
+  powerUps: []
 --- !u!114 &3618721017374336633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,12 +125,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45d2065aac0e2a40b588f74f226b1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 20
+  enemyHealth: 20000
   points: 135
-  shootRandomRange: 4
-  enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
+  specialtyTypeEnemy: 0
+  isBoss: 1
+  shootrandomRangeMin: 1
+  shootRandomRange: 1.75
+  enemyProjectile: {fileID: 979847751105616194, guid: 8aee20a56515b7041a4eb6c372f02c17,
     type: 3}
-  projectileSpeed: 5
+  projectileSpeed: 4
+  projectileQuantity: 3
+  homingShot: 0
+  addedDamage: 35
   explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
 --- !u!114 &8783522860568847664
@@ -127,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb60b2993f9a91488bd65fe80f79604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 75
   shootSound: {fileID: 0}
-  shootVolume: 0.25
+  shootVolume: 0
 --- !u!60 &1664531695993308577
 PolygonCollider2D:
   m_ObjectHideFlags: 0

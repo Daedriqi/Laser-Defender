@@ -7,10 +7,17 @@ public class BigBombUI : MonoBehaviour {
     [SerializeField] float startingXPos = -2.5f;
     [SerializeField] float constantYPos = 4.25f;
 
+    Game game;
+
     float currentXPos;
 
-    private void Start() {
+    void Start() {
+        game = FindObjectOfType<Game>();
         currentXPos = startingXPos;
+    }
+
+    public void Update() {
+
     }
 
     public void SetStartingXPos() {

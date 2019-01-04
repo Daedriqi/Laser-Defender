@@ -1563,12 +1563,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuMusic: {fileID: 8300000, guid: f8ef79f4ce2b908438735d073ecd499a, type: 3}
-  gameSpeed: 1
   gameOverMusic: {fileID: 8300000, guid: 521dd5f113658f44089772546deefe8b, type: 3}
   gameMusic: {fileID: 8300000, guid: 5dcd43114955d634fb51f70cfcf657d3, type: 3}
+  bossMusic: {fileID: 8300000, guid: 19ac29adb1ed007468e732e499a337d5, type: 3}
   victoryMusic: {fileID: 8300000, guid: 8bd3e89dec7edaa43a1ac9dfc0adfc5e, type: 3}
-  state: 4
-  enemyHealthScaling: 2
   healthBarUIObject: {fileID: 3128475305828002541}
   playButton: {fileID: 1651567251}
   playButtonText: {fileID: 5518627412617397673}
@@ -1576,6 +1574,9 @@ MonoBehaviour:
   quitButton: {fileID: 398087606}
   scoreboard: {fileID: 1019974433322362339}
   statusText: {fileID: 1581565226626001141}
+  state: 4
+  gameSpeed: 1
+  enemyHealthScaling: 2
 --- !u!82 &200002730
 AudioSource:
   m_ObjectHideFlags: 0

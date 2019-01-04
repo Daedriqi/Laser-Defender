@@ -31,4 +31,7 @@ public class DamageDealer : MonoBehaviour {
         return damage;
     }
 
+    public void SetDamage(int addedValue) {
+        damage = damage + addedValue;
+    }
 }

@@ -8,13 +8,14 @@ using TMPro;
 
 public class Game : MonoBehaviour {
     //configuration parameters
+    [Header("Music")]
     [SerializeField] AudioClip menuMusic;
-    [Range(0f, 10f)] [SerializeField] float gameSpeed = 1;
     [SerializeField] AudioClip gameOverMusic;
     [SerializeField] AudioClip gameMusic;
+    [SerializeField] AudioClip bossMusic;
     [SerializeField] AudioClip victoryMusic;
-    [SerializeField] GameState state = GameState.Playing;
-    [SerializeField] int enemyHealthScaling = 1;
+
+    [Header("UI")]
     [SerializeField] GameObject healthBarUIObject;
     [SerializeField] GameObject playButton;
     [SerializeField] TextMeshProUGUI playButtonText;
@@ -23,11 +24,17 @@ public class Game : MonoBehaviour {
     [SerializeField] TextMeshProUGUI scoreboard;
     [SerializeField] TextMeshProUGUI statusText;
 
+    [Header("Other")]
+    [SerializeField] GameState state = GameState.Playing;
+    [Range(0f, 10f)] [SerializeField] float gameSpeed = 1;
+    [SerializeField] int enemyHealthScaling = 1;
+
     //cache references
     int levelIndex = 0;
     int score;
     int maxHealthScaler = 25;
     int currentHealthScaling = 0;
+    bool bossFight = false;
     PlayerShip playerShip;
     BigBombUI bigBombUI;
     HealthBarUI healthBarUI;
@@ -48,6 +55,10 @@ public class Game : MonoBehaviour {
         audioSource = gameObject.GetComponent<AudioSource>();
         SetGameState(GameState.Menu);
         playerShip = FindObjectOfType<PlayerShip>();
+        bigBombUI = FindObjectOfType<BigBombUI>();
+        if (bigBombUI != null) {
+            bigBombUI.RemoveAmmo();
+        }
     }
 
     // Update is called once per frame
@@ -78,15 +89,24 @@ public class Game : MonoBehaviour {
         //TODO fill this
     }
 
+    public void PlayBossMusic() {
+        bossFight = true;
+        audioSource.Stop();
+        audioSource.clip = bossMusic;
+        audioSource.Play();
+    }
+
+    public void PlayGameMusic() {
+        bossFight = false;
+        audioSource.Stop();
+        audioSource.clip = gameMusic;
+        audioSource.Play();
+    }
+
     public void SetGameState(GameState newState) {
         state = newState;
         if (newState == GameState.Playing) {
             healthBarUIObject.SetActive(true);
-            if (audioSource.clip != gameMusic) {
-                audioSource.Stop();
-                audioSource.clip = gameMusic;
-                audioSource.Play();
-            }
             scoreboard.text = "Score: " + score;
             Time.timeScale = 1;
             statusText.text = "";
@@ -170,11 +190,19 @@ public class Game : MonoBehaviour {
         quitButton.SetActive(false);
         playButton.SetActive(false);
         settingsButton.SetActive(false);
+        audioSource.Stop();
+        audioSource.clip = gameMusic;
+        audioSource.Play();
         currentHealthScaling = 0;
         Time.timeScale = 1;
         statusText.text = "";
         scoreboard.text = "Score: 0";
         SceneManager.LoadScene("Game");
+        bigBombUI = FindObjectOfType<BigBombUI>();
+        if (bigBombUI != null) {
+            bigBombUI.RemoveAmmo();
+            bigBombUI.FillAmmoBar(3);
+        }
     }
 
     public GameState GetGameState() {
