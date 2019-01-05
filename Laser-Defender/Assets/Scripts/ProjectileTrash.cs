@@ -14,7 +14,7 @@ public class ProjectileTrash : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.tag.Contains("Bullet")) {
+        if (collider.gameObject.tag.Contains("Bullet") || collider.gameObject.tag.Contains("PowerUp")) {
             Destroy(collider.gameObject);
         }
         if (gameObject.tag != "Player" && collider.gameObject.tag == "Destructor") {

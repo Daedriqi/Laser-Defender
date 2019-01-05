@@ -24,7 +24,7 @@ public class PowerUp : MonoBehaviour {
         AudioSource.PlayClipAtPoint(powerUpSound, Camera.main.transform.position, clipVolume);
         PlayerShip player = playerObject.GetComponent<PlayerShip>();
         if (type == PowerUpType.HealthUp) {
-            player.UpdatePlayerHealth(25);
+            player.UpdatePlayerHealth(50);
         }
         if (type == PowerUpType.ProjectileQuantityUp) {
             player.IncreaseBulletQuantity();
@@ -36,7 +36,7 @@ public class PowerUp : MonoBehaviour {
             player.IncreaseBulletSize();
         }
         if (type == PowerUpType.ShieldBoost) {
-            player.UpdatePlayerShield(40);
+            player.UpdatePlayerShield(75);
         }
         if (type == PowerUpType.BigBlastAmmo) {
             player.UpdateBigBlastAmmo();            

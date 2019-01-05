@@ -47,7 +47,7 @@ public class EnemyShip : MonoBehaviour {
     }
 
     private IEnumerator ShootOnDelay() {
-        if (game.GetGameState() == Game.GameState.Playing && !specialtyTypeEnemy) {
+        if (game.GetGameState() == Game.GameState.Playing && !specialtyTypeEnemy && !dead) {
             canShoot = false;
             randomWaitTime = UnityEngine.Random.Range(shootrandomRangeMin, shootRandomRange);
             yield return new WaitForSeconds(randomWaitTime);
@@ -128,6 +128,15 @@ public class EnemyShip : MonoBehaviour {
         return shieldScale;
     }
 
+    public GameObject GetExplosion() {
+        return explosionVFX;
+    }
+
+    public void MakeDead() {
+        StopCoroutine(shootOnDelay);
+        dead = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if ((collision.gameObject.tag == "PlayerBullet" || collision.gameObject.tag == "Destructor") && !dead && !immuneToDamage) {
             DamageDealer damageDealer = collision.GetComponent<DamageDealer>();
@@ -140,7 +149,7 @@ public class EnemyShip : MonoBehaviour {
                 int score = game.AddToScore(points);
                 if (isBoss) {
                     BossFight bossFight = FindObjectOfType<BossFight>();
-                    bossFight.DeathAnimation();
+                    bossFight.BossDeath();
                 }
                 else {
                     this.waveContainer.UpdateEnemiesDestroyed();

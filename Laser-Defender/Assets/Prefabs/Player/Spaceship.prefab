@@ -52,7 +52,7 @@ MonoBehaviour:
   playerHealth: 150
   shieldCapacity: 150
   damageImmunityTime: 1
-  shieldPrefab: {fileID: 5490290133560728547, guid: 41d368147cd2d9e4da8661779515d3f9,
+  shieldPrefab: {fileID: 1859825476978986860, guid: 808824d9d56700e4a86bb4a1ad1a8e02,
     type: 3}
   shipSpeed: 2.5
   minXPos: 0
@@ -65,9 +65,12 @@ MonoBehaviour:
   - {fileID: 1363376297, guid: 672512febf4677d488c432cb52cb1594, type: 3}
   - {fileID: 1363376297, guid: b2e50e1ef410250409535c3349eb3c8b, type: 3}
   - {fileID: 1363376297, guid: 712e540d6292bd64f8b52f54e6a39f71, type: 3}
+  - {fileID: 1363376297, guid: de83766b5937f1845b182bebbf0e1f6f, type: 3}
+  - {fileID: 1363376297, guid: 323656f1d3105ae4e926011a589b711c, type: 3}
+  - {fileID: 1363376297, guid: b9725b6ca366ad44d84342172fa9ed5a, type: 3}
   destructor: {fileID: 7628457572313487382, guid: b17b0b86e1bef5541981a68d4eec852b,
     type: 3}
-  maxBulletQuantity: 5
+  maxBulletQuantity: 3
   maxBulletPowerIndex: 3
   minBulletDelay: 0.15
   maxBigBombs: 3
@@ -80,6 +83,7 @@ MonoBehaviour:
   deathExplosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
   hitSound: {fileID: 8300000, guid: 59b9d05e64a9bc348a3ec089846f7fc9, type: 3}
+  immuneToDamage: 0
 --- !u!212 &8662119360228639449
 SpriteRenderer:
   m_ObjectHideFlags: 0

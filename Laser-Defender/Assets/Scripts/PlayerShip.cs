@@ -126,15 +126,15 @@ public class PlayerShip : MonoBehaviour {
                 projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed * 2, projectileSpeed);
             }
             if (numberOfBullets >= 7) {
-                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x + 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, -40));
-                projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed * 2, projectileSpeed);
-                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x - 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, 40));
-                projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed * 2, projectileSpeed);
+                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x + 0.5f, transform.position.y + 0.25f, 0), Quaternion.identity);
+                projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x - 0.5f, transform.position.y + 0.25f, 0), Quaternion.identity);
+                projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
             }
             if (numberOfBullets >= 9) {
-                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x + 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, -40));
+                GameObject projectile4 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, 0), Quaternion.Euler(0, 0, -40));
                 projectile4.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed * 2, projectileSpeed);
-                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x - 0.5f, transform.position.y + 0.25f, 0), Quaternion.Euler(0, 0, 40));
+                GameObject projectile5 = Instantiate(plasmaBalls[currentBulletPowerIndex], new Vector3(transform.position.x - 0.5f, transform.position.y + 0.5f, 0), Quaternion.Euler(0, 0, 40));
                 projectile5.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectileSpeed * 2, projectileSpeed);
             }
         }
@@ -219,7 +219,7 @@ public class PlayerShip : MonoBehaviour {
 
     public void DecreaseShootDelay() {
         if (currentShootDelay > minBulletDelay) {
-            currentShootDelay -= 0.05f;
+            currentShootDelay -= 0.035f;
         }
     }
 
@@ -232,8 +232,8 @@ public class PlayerShip : MonoBehaviour {
     }
 
     public void SubtractFromMinBulletDelay() {
-        if (minBulletDelay > 0.05f) {
-            minBulletDelay -= 0.05f;
+        if (minBulletDelay > 0.15f) {
+            minBulletDelay -= 0.15f;
         }
     }
 
@@ -306,41 +306,41 @@ public class PlayerShip : MonoBehaviour {
             spriteRenderer.enabled = true;
         }
         game.SetTimeScale(0.35f);
-        StartCoroutine(DeathExplostions());
+        StartCoroutine(DeathExplosions());
         yield return new WaitForSeconds(0.75f);
         game.SetGameState(Game.GameState.GameOver);
         Destroy(gameObject);
     }
 
-    private IEnumerator DeathExplostions() {
+    private IEnumerator DeathExplosions() {
         AudioClip clip;
         Vector3 explosion1Position = new Vector3(transform.position.x - 0.1578f, transform.position.y - 0.118f, transform.position.z - 1);
-        GameObject explostion1 = Instantiate(deathExplosionVFX, explosion1Position, Quaternion.identity);
-        explostion1.GetComponent<AudioSource>().volume = 0.25f;
-        explostion1.transform.parent = transform;
-        clip = explostion1.GetComponent<AudioSource>().clip;
+        GameObject explosion1 = Instantiate(deathExplosionVFX, explosion1Position, Quaternion.identity);
+        explosion1.GetComponent<AudioSource>().volume = 0.25f;
+        explosion1.transform.parent = transform;
+        clip = explosion1.GetComponent<AudioSource>().clip;
         AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
         yield return new WaitForSeconds(0.1f);
         Vector3 explosion2Position = new Vector3(transform.position.x - 0.1f, transform.position.y + 0.245f, transform.position.z - 1);
-        GameObject explostion2 = Instantiate(deathExplosionVFX, explosion2Position, Quaternion.identity);
-        explostion2.GetComponent<AudioSource>().volume = 0.5f;
-        explostion2.transform.parent = transform;
-        clip = explostion2.GetComponent<AudioSource>().clip;
+        GameObject explosion2 = Instantiate(deathExplosionVFX, explosion2Position, Quaternion.identity);
+        explosion2.GetComponent<AudioSource>().volume = 0.5f;
+        explosion2.transform.parent = transform;
+        clip = explosion2.GetComponent<AudioSource>().clip;
         AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
         yield return new WaitForSeconds(0.15f);
         Vector3 explosion3Position = new Vector3(transform.position.x + 0.234f, transform.position.y - 0.045f, transform.position.z - 1);
-        GameObject explostion3 = Instantiate(deathExplosionVFX, explosion3Position, Quaternion.identity);
-        explostion3.GetComponent<AudioSource>().volume = 0.5f;
-        explostion3.transform.parent = transform;
-        clip = explostion3.GetComponent<AudioSource>().clip;
+        GameObject explosion3 = Instantiate(deathExplosionVFX, explosion3Position, Quaternion.identity);
+        explosion3.GetComponent<AudioSource>().volume = 0.5f;
+        explosion3.transform.parent = transform;
+        clip = explosion3.GetComponent<AudioSource>().clip;
         AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
         yield return new WaitForSeconds(0.2f);
         Vector3 explosion4Position = new Vector3(transform.position.x + 0.038f, transform.position.y + 0.067f, transform.position.z - 1);
-        GameObject explostion4 = Instantiate(deathExplosionVFX, explosion4Position, Quaternion.identity);
-        explostion4.GetComponent<AudioSource>().volume = 1;
-        explostion4.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
-        explostion4.transform.parent = transform;
-        clip = explostion4.GetComponent<AudioSource>().clip;
+        GameObject explosion4 = Instantiate(deathExplosionVFX, explosion4Position, Quaternion.identity);
+        explosion4.GetComponent<AudioSource>().volume = 1;
+        explosion4.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+        explosion4.transform.parent = transform;
+        clip = explosion4.GetComponent<AudioSource>().clip;
         AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
     }
 

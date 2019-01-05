@@ -110,14 +110,15 @@ public class EnemySpawner : MonoBehaviour {
         currentRound = 0;
         waveCount = 0;
         waveIndex = 0;
-        bossIndex++;
-        game.IncreaseLevelIndex();
-        levelIndex = game.GetLevelIndex();
         StartCoroutine(BreakTime());
     }
 
     private IEnumerator BreakTime() {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
+        game.IncreaseLevelIndex();
+        levelIndex = game.GetLevelIndex();
+        bossIndex++;
+        yield return new WaitForSeconds(2);
         nextWave = true;
     }
 
@@ -133,9 +134,7 @@ public class EnemySpawner : MonoBehaviour {
         specialEnemy1.transform.parent = waveContainerObject1.transform;
         EnemyShip enemyShip1 = specialEnemy1.GetComponent<EnemyShip>();
         enemyShip1.SetHealthOnSpawn(game.GetHealthScaling());
-
         if (levelIndex >= 3) {
-            Debug.Log("Level index is now more than 3");
             GameObject waveContainerObject2 = Instantiate(waveContainerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             waveContainerObject2.name = "SpecialContainer";
             GameObject specialEnemy2 = Instantiate(specialtySpawns[1], new Vector3(0, 5.75f, 0), Quaternion.identity);
@@ -145,7 +144,6 @@ public class EnemySpawner : MonoBehaviour {
             enemyShip2.SetHealthOnSpawn(game.GetHealthScaling());
         }
         if (levelIndex >= 5) {
-            Debug.Log("Level index is now more than 1");
             GameObject waveContainerObject3 = Instantiate(waveContainerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             waveContainerObject3.name = "SpecialContainer";
             GameObject specialEnemy3 = Instantiate(specialtySpawns[2], new Vector3(0, 5.75f, 0), Quaternion.identity);
@@ -154,6 +152,7 @@ public class EnemySpawner : MonoBehaviour {
             EnemyShip enemyShip3 = specialEnemy3.GetComponent<EnemyShip>();
             enemyShip3.SetHealthOnSpawn(game.GetHealthScaling());
         }
+        waveContainer1.MakeDestroyable();
     }
 
     private IEnumerator SpawnAllEnemiesForPath(List<Transform> path, WaveConfig waveToSpawn, GameObject waveContainer) {

@@ -18,7 +18,6 @@ public class WaveContainer : MonoBehaviour {
     private IEnumerator WaitForSpawns() {
         yield return new WaitForSeconds((wave.GetTimeBetweenSpawns() * wave.GetEnemyCount()));
         destroyable = true;
-        StopCoroutine(waitForSpawns);
     }
 
 
@@ -37,6 +36,10 @@ public class WaveContainer : MonoBehaviour {
 
     public WaveConfig GetWave() {
         return wave;
+    }
+    
+    public void MakeDestroyable() {
+        destroyable = true;
     }
 
     public void UpdateEnemiesDestroyed() {

@@ -192,7 +192,6 @@ public class Game : MonoBehaviour {
         StopAllCoroutines();
         levelIndex = startLevelIndex;
         score = 0;
-        playerShip.ResetDefaultStats();
         SetGameState(GameState.Playing);
         healthBarUIObject.SetActive(true);
         healthBarUI.UpdateHealthBar(300);
