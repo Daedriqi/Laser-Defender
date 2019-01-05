@@ -12,7 +12,6 @@ public class EnemySpawner : MonoBehaviour {
 
     int waveIndex = 0;
     int waveCount = 0;
-    int levelIndex = 0;
     int currentRound = 0;
     bool nextWave = true;
     bool bossFight = false;
@@ -22,10 +21,12 @@ public class EnemySpawner : MonoBehaviour {
     Coroutine spawnAllEnemiesInWave;
     Coroutine spawnAllEnemiesForPath;
     Coroutine bossFightRoutine;
+    int levelIndex;
 
     // Start is called before the first frame update
     void Start() {
         game = FindObjectOfType<Game>();
+        levelIndex = game.GetLevelIndex();
         currentWave = waveConfigs[0];
     }
 
@@ -83,7 +84,6 @@ public class EnemySpawner : MonoBehaviour {
             yield return new WaitForSeconds(15);
         }
         if (levelIndex >= 1) {
-            Debug.Log("Level index is now more than 1");
             SpawnSpecialtyWave();
         }
         nextWave = true;
@@ -110,8 +110,9 @@ public class EnemySpawner : MonoBehaviour {
         currentRound = 0;
         waveCount = 0;
         waveIndex = 0;
-        levelIndex++;
         bossIndex++;
+        game.IncreaseLevelIndex();
+        levelIndex = game.GetLevelIndex();
         StartCoroutine(BreakTime());
     }
 

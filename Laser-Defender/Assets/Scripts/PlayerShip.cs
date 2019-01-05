@@ -56,12 +56,13 @@ public class PlayerShip : MonoBehaviour {
     int currentHealthLeft;
     int currentBulletPowerIndex;
     bool shieldUp = false;
-    bool immuneToDamage = false;
     int numberOfBullets = 1;
     float timeBuffer;
     float paddingLeftRight = 0.35f;
     float paddingTop = 4f;
     float paddingBottom = 0.5f;
+    //serialized for testing
+    [SerializeField] bool immuneToDamage = false;
 
 
     // Start is called before the first frame update
@@ -182,7 +183,7 @@ public class PlayerShip : MonoBehaviour {
     }
 
     public void IncreaseBulletSize() {
-        if (currentBulletPowerIndex < maxBulletPowerIndex && currentBulletPowerIndex < plasmaBalls.Count) {
+        if (currentBulletPowerIndex < maxBulletPowerIndex && currentBulletPowerIndex < plasmaBalls.Count - 1) {
             currentBulletPowerIndex++;
         }
     }
@@ -211,21 +212,19 @@ public class PlayerShip : MonoBehaviour {
     }
 
     public void IncreaseBulletQuantity() {
-        numberOfBullets += 2;
-        if (numberOfBullets > maxBulletQuantity) {
-            numberOfBullets = maxBulletQuantity;
+        if (numberOfBullets < maxBulletQuantity) {
+            numberOfBullets += 2;
         }
     }
 
     public void DecreaseShootDelay() {
-        currentShootDelay -= 0.05f;
-        if (currentShootDelay < minBulletDelay) {
-            currentShootDelay = minBulletDelay;
+        if (currentShootDelay > minBulletDelay) {
+            currentShootDelay -= 0.05f;
         }
     }
 
     public void AddToMaxBulletQuantity() {
-        maxBulletQuantity++;
+        maxBulletQuantity += 2;
     }
 
     public void AddToMaxBulletPowerIndex() {
@@ -233,11 +232,20 @@ public class PlayerShip : MonoBehaviour {
     }
 
     public void SubtractFromMinBulletDelay() {
-        minBulletDelay -= 0.05f;
+        if (minBulletDelay > 0.05f) {
+            minBulletDelay -= 0.05f;
+        }
     }
 
     public void AddToMaxBigBombs() {
         maxBigBombs++;
+    }
+
+    public void IncreasePlayerStats() {
+        AddToMaxBigBombs();
+        AddToMaxBulletPowerIndex();
+        AddToMaxBulletQuantity();
+        SubtractFromMinBulletDelay();
     }
 
     public void ResetDefaultStats() {

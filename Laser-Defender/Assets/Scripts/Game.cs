@@ -28,10 +28,11 @@ public class Game : MonoBehaviour {
     [SerializeField] GameState state = GameState.Playing;
     [Range(0f, 10f)] [SerializeField] float gameSpeed = 1;
     [SerializeField] int enemyHealthScaling = 1;
+    [Range(0, 5)][SerializeField] int startLevelIndex = 0;
 
     //cache references
-    int levelIndex = 0;
     int score;
+    int levelIndex;
     int maxHealthScaler = 25;
     int currentHealthScaling = 0;
     bool bossFight = false;
@@ -44,6 +45,7 @@ public class Game : MonoBehaviour {
 
     // Start is called before the first frame update
     void Awake() {
+        levelIndex = startLevelIndex;
         audioSource = gameObject.GetComponent<AudioSource>();
         healthBarUI = FindObjectOfType<HealthBarUI>();
         if (FindObjectsOfType(GetType()).Length > 1) {
@@ -151,6 +153,12 @@ public class Game : MonoBehaviour {
         return currentHealthScaling;
     }
 
+    public void IncreaseLevelIndex() {
+        levelIndex++;
+        playerShip = FindObjectOfType<PlayerShip>();
+        playerShip.IncreasePlayerStats();
+    }
+
     private void GameOver() {
         SetTimeScale(0);
         quitButton.SetActive(true);
@@ -176,9 +184,13 @@ public class Game : MonoBehaviour {
         return levelIndex;
     }
 
+    public void SetLevelIndex(int level) {
+        levelIndex = level;
+    }
+
     public void RestartGame() {
         StopAllCoroutines();
-        levelIndex = 0;
+        levelIndex = startLevelIndex;
         score = 0;
         playerShip.ResetDefaultStats();
         SetGameState(GameState.Playing);

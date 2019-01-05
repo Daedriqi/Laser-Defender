@@ -1577,6 +1577,7 @@ MonoBehaviour:
   state: 4
   gameSpeed: 1
   enemyHealthScaling: 2
+  startLevelIndex: 0
 --- !u!82 &200002730
 AudioSource:
   m_ObjectHideFlags: 0
