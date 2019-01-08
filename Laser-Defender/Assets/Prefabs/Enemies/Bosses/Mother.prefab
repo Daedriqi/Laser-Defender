@@ -115,7 +115,8 @@ MonoBehaviour:
   - {fileID: 4660618751400820643, guid: a2765ff0ba566874ca003faae38a0589, type: 3}
   - {fileID: 6830389332653465972, guid: 2c62b8c267cecda47bc9690b8b8b4f06, type: 3}
   - {fileID: 125963951, guid: 59335f64696233546bd43afb712503ac, type: 3}
-  explosionPattern: {fileID: 0}
+  explosionPattern: {fileID: 3563551495461721868, guid: 5f637aa83dbb58c40b3899341219089e,
+    type: 3}
   type: 2
 --- !u!114 &6622551311055520852
 MonoBehaviour:
