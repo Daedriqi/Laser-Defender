@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossFight : MonoBehaviour {
+public class BossMechanics : MonoBehaviour {
     [SerializeField] float bossSpeed = 3f;
     [SerializeField] float timeBetweenEnemyWaves = 10;
     [SerializeField] Vector3 startingPoint;
@@ -43,10 +43,7 @@ public class BossFight : MonoBehaviour {
             else if (bigLaserWarmingUp) {
                 MoveToCenter();
             }
-            else if (intoPositionForLaser) {
-                //stay put
-            }
-            else {
+            else if (!intoPositionForLaser && !bigLaserWarmingUp) {
                 MoveOnPath();
             }
         }

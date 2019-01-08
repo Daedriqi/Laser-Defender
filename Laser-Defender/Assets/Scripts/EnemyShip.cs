@@ -171,8 +171,8 @@ public class EnemyShip : MonoBehaviour {
                 dead = true;
                 int score = game.AddToScore(points);
                 if (isBoss) {
-                    BossFight bossFight = FindObjectOfType<BossFight>();
-                    bossFight.BossDeath();
+                    BossMechanics bossMechanics = FindObjectOfType<BossMechanics>();
+                    bossMechanics.BossDeath();
                 }
                 else {
                     this.waveContainer.UpdateEnemiesDestroyed();

@@ -10,17 +10,18 @@ public class JudgementFight : MonoBehaviour {
     [SerializeField] GameObject laserBeam;
     [SerializeField] float rotatingSpeed = 20;
 
-    BossFight bossFight;
+    BossMechanics bossMechanics;
     Game game;
     bool doingTheSpin = false;
     bool doneSpinning = false;
     bool laserWarmingUp = false;
     int randomDirectionDecider;
     bool clockwiseRotation = false;
+    bool canSpawnEnemies = false;
     // Start is called before the first frame update
     void Start() {
         game = FindObjectOfType<Game>();
-        bossFight = FindObjectOfType<BossFight>();
+        bossMechanics = FindObjectOfType<BossMechanics>();
         StartCoroutine(WaitForLaserDelay());
     }
 
@@ -43,11 +44,15 @@ public class JudgementFight : MonoBehaviour {
                 EndBigLaser();
             }
         }
+        if (canSpawnEnemies) {
+            canSpawnEnemies = false;
+            StartCoroutine(SpawnMinions());
+        }
     }
 
     private IEnumerator WaitForLaserDelay() {
         yield return new WaitForSeconds(bigLaserDelay);
-        bossFight.SetIsFiringBigLaserOn();
+        bossMechanics.SetIsFiringBigLaserOn();
     }
 
     private IEnumerator WarmupAndShootBigLaser() {
@@ -99,7 +104,12 @@ public class JudgementFight : MonoBehaviour {
     }
 
     public void EndBigLaser() {
-        bossFight.SetIsFiringBigLaserOff();
+        canSpawnEnemies = true;
+        bossMechanics.SetIsFiringBigLaserOff();
         StartCoroutine(WaitForLaserDelay());
+    }
+
+    private IEnumerator SpawnMinions() {
+        yield return new WaitForSeconds(5);
     }
 }

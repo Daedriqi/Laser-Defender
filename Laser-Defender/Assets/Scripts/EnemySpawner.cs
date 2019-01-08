@@ -12,16 +12,18 @@ public class EnemySpawner : MonoBehaviour {
 
     int waveIndex = 0;
     int waveCount = 0;
-    int currentRound = 3;
+    int currentRound = 0;
     bool nextWave = true;
     bool bossFight = false;
-    int bossIndex = 1;
+    int bossIndex = 0;
     WaveConfig currentWave;
     Game game;
+    BossMechanics bossMechanics;
     Coroutine spawnAllEnemiesInWave;
     Coroutine spawnAllEnemiesForPath;
     Coroutine bossFightRoutine;
     int levelIndex;
+    float waitTimeForBossWaveSpawn;
 
     // Start is called before the first frame update
     void Start() {
@@ -78,10 +80,12 @@ public class EnemySpawner : MonoBehaviour {
             }
         }
         if (bossFight) {
+            bossMechanics = FindObjectOfType<BossMechanics>();
+            waitTimeForBossWaveSpawn = bossMechanics.GetTimeBetweenEnemyWaves();
             if (waveCount >= 5) {
                 waveCount = 0;
             }
-            yield return new WaitForSeconds(FindObjectOfType<BossFight>().GetTimeBetweenEnemyWaves());
+            yield return new WaitForSeconds(waitTimeForBossWaveSpawn);
         }
         if (levelIndex >= 1) {
             SpawnSpecialtyWave();

@@ -16,7 +16,7 @@ public class WaveContainer : MonoBehaviour {
     }
 
     private IEnumerator WaitForSpawns() {
-        yield return new WaitForSeconds((wave.GetTimeBetweenSpawns() * wave.GetEnemyCount()));
+        yield return new WaitForSeconds((wave.GetTimeBetweenSpawns() * wave.GetEnemyCount()) + 0.5f);
         destroyable = true;
     }
 
