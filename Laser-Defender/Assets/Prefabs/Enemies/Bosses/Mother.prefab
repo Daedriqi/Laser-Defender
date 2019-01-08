@@ -96,9 +96,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossSpeed: 1.5
+  timeBetweenEnemyWaves: 10
   startingPoint: {x: 0, y: 3, z: 0}
   path: {fileID: 3563551495461721868, guid: 319ceb56e65e1fd4eb4b38ae2b842d16, type: 3}
-  powerUps: []
+  powerUps:
+  - {fileID: 125963951, guid: 59335f64696233546bd43afb712503ac, type: 3}
+  - {fileID: 125963951, guid: 59335f64696233546bd43afb712503ac, type: 3}
+  - {fileID: 6830389332653465972, guid: 2c62b8c267cecda47bc9690b8b8b4f06, type: 3}
+  - {fileID: 6646797413254950232, guid: c88085a05d4e28941966e6bfee721fd4, type: 3}
+  - {fileID: 125963951, guid: 59335f64696233546bd43afb712503ac, type: 3}
+  - {fileID: 6830389332653465972, guid: 2c62b8c267cecda47bc9690b8b8b4f06, type: 3}
+  - {fileID: 6646797413254950232, guid: c88085a05d4e28941966e6bfee721fd4, type: 3}
+  - {fileID: 6830389332653465972, guid: 2c62b8c267cecda47bc9690b8b8b4f06, type: 3}
+  - {fileID: 125963951, guid: 59335f64696233546bd43afb712503ac, type: 3}
+  - {fileID: 1983774524568970427, guid: 9a22660fd751ff7459b33b884d944a24, type: 3}
+  - {fileID: 125963951, guid: 59335f64696233546bd43afb712503ac, type: 3}
+  - {fileID: 1983774524568970427, guid: 9a22660fd751ff7459b33b884d944a24, type: 3}
+  - {fileID: 4660618751400820643, guid: a2765ff0ba566874ca003faae38a0589, type: 3}
+  - {fileID: 6830389332653465972, guid: 2c62b8c267cecda47bc9690b8b8b4f06, type: 3}
+  - {fileID: 125963951, guid: 59335f64696233546bd43afb712503ac, type: 3}
   explosionPattern: {fileID: 0}
   type: 2
 --- !u!114 &6622551311055520852

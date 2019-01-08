@@ -148,12 +148,14 @@ public class BossMechanics : MonoBehaviour {
     private IEnumerator SpawnPowerUps() {
         float xSpawn;
         float ySpawn;
-        foreach (GameObject lootDrop in powerUps) {
-            xSpawn = UnityEngine.Random.Range(-2.8f, 2.9f);
-            ySpawn = UnityEngine.Random.Range(5.35f, 6f);
-            GameObject powerUp = Instantiate(lootDrop, new Vector3(xSpawn, ySpawn, 0), Quaternion.identity);
-            powerUp.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
-            yield return new WaitForSeconds(UnityEngine.Random.Range(0, 0.25f));
+        if (powerUps.Count > 0) {
+            foreach (GameObject lootDrop in powerUps) {
+                xSpawn = UnityEngine.Random.Range(-2.8f, 2.9f);
+                ySpawn = UnityEngine.Random.Range(5.35f, 6f);
+                GameObject powerUp = Instantiate(lootDrop, new Vector3(xSpawn, ySpawn, 0), Quaternion.identity);
+                powerUp.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
+                yield return new WaitForSeconds(UnityEngine.Random.Range(0, 0.25f));
+            }
         }
         Destroy(gameObject);
         EnemySpawner spawner = FindObjectOfType<EnemySpawner>();

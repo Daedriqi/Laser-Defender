@@ -31,6 +31,7 @@ MonoBehaviour:
   - {fileID: 4660618751400820643, guid: a2765ff0ba566874ca003faae38a0589, type: 3}
   - {fileID: 1983774524568970427, guid: 9a22660fd751ff7459b33b884d944a24, type: 3}
   - {fileID: 1983774524568970427, guid: 9a22660fd751ff7459b33b884d944a24, type: 3}
+  - {fileID: 8086872931155216310, guid: ff326583309b05e478ce0df23c24776f, type: 3}
   paths:
   - {fileID: 3563551495461721868, guid: f65bbf0b96f8c654e9c236eb87fa2b3e, type: 3}
   timeBetweenSpawns: 0.75
