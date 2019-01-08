@@ -116,7 +116,7 @@ MonoBehaviour:
   shootRandomRange: 3.5
   enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
     type: 3}
-  projectileSpeed: 5
+  projectileSpeed: 3
   projectileQuantity: 1
   homingShot: 0
   addedDamage: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3563551495461721869}
   m_Layer: 0
-  m_Name: TornadoBoss
+  m_Name: TornadoPath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

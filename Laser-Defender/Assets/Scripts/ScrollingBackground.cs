@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ScrollingBackground : MonoBehaviour {
     [Range(0, 1)][SerializeField] float scrollingSpeed = 0.03f;
+    [SerializeField] List<Texture> textures;
 
     Game game;
     Material material;
@@ -23,4 +24,10 @@ public class ScrollingBackground : MonoBehaviour {
             material.mainTextureOffset = offset;
         }
     }
+
+    //changes the texture on the background will use this later to transition in levels
+    //private IEnumerator Test() {
+    //    yield return new WaitForSeconds(3);
+    //    material.mainTexture = textures[1];
+    //}
 }

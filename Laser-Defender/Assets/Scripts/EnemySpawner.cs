@@ -12,10 +12,10 @@ public class EnemySpawner : MonoBehaviour {
 
     int waveIndex = 0;
     int waveCount = 0;
-    int currentRound = 0;
+    int currentRound = 3;
     bool nextWave = true;
     bool bossFight = false;
-    int bossIndex = 0;
+    int bossIndex = 1;
     WaveConfig currentWave;
     Game game;
     Coroutine spawnAllEnemiesInWave;
@@ -81,7 +81,7 @@ public class EnemySpawner : MonoBehaviour {
             if (waveCount >= 5) {
                 waveCount = 0;
             }
-            yield return new WaitForSeconds(15);
+            yield return new WaitForSeconds(FindObjectOfType<BossFight>().GetTimeBetweenEnemyWaves());
         }
         if (levelIndex >= 1) {
             SpawnSpecialtyWave();

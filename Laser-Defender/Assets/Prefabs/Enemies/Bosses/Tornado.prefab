@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossSpeed: 1.5
+  timeBetweenEnemyWaves: 15
   startingPoint: {x: 0, y: 2.5, z: 0}
   path: {fileID: 3563551495461721868, guid: 319ceb56e65e1fd4eb4b38ae2b842d16, type: 3}
   powerUps:
@@ -119,6 +120,7 @@ MonoBehaviour:
   - {fileID: 6646797413254950232, guid: c88085a05d4e28941966e6bfee721fd4, type: 3}
   explosionPattern: {fileID: 3563551495461721868, guid: d3c9f84e0a3f9d3469e6adc94f7213fa,
     type: 3}
+  type: 0
 --- !u!114 &6622551311055520852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45d2065aac0e2a40b588f74f226b1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 12500
+  enemyHealth: 10000
   points: 75000
   specialtyTypeEnemy: 0
   isBoss: 1

@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class BossFight : MonoBehaviour {
     [SerializeField] float bossSpeed = 3f;
+    [SerializeField] float timeBetweenEnemyWaves = 10;
     [SerializeField] Vector3 startingPoint;
     [SerializeField] GameObject path;
     [SerializeField] List<GameObject> powerUps;
     [SerializeField] GameObject explosionPattern;
+    [SerializeField] BossType type;
 
     Game game;
     List<Transform> waypoints;
@@ -16,8 +18,11 @@ public class BossFight : MonoBehaviour {
     EnemyShip bossShip;
 
     bool movedIntoStartPosition = false;
+    bool intoPositionForLaser = false;
+    bool bigLaserWarmingUp = false;
     int waypointIndex = 0;
     float randomWaitTime;
+    Vector3 centerPos;
 
     // Start is called before the first frame update
     void Start() {
@@ -26,6 +31,7 @@ public class BossFight : MonoBehaviour {
         game.PlayBossMusic();
         SetWaypoints();
         SetExplosionPoints();
+        centerPos = new Vector3(0, 1, 0);
     }
 
     // Update is called once per frame
@@ -34,9 +40,44 @@ public class BossFight : MonoBehaviour {
             if (!movedIntoStartPosition) {
                 MoveIntoPosition();
             }
+            else if (bigLaserWarmingUp) {
+                MoveToCenter();
+            }
+            else if (intoPositionForLaser) {
+                //stay put
+            }
             else {
                 MoveOnPath();
             }
+        }
+    }
+
+    public float GetTimeBetweenEnemyWaves() {
+        return timeBetweenEnemyWaves;
+    }
+
+    public void SetIsFiringBigLaserOn() {
+        bigLaserWarmingUp = true;
+        bossShip.SetCanShoot(false);
+        intoPositionForLaser = false;
+    }
+
+    public void SetIsFiringBigLaserOff() {
+        bigLaserWarmingUp = false;
+        bossShip.SetCanShoot(true);
+        intoPositionForLaser = false;
+    }
+
+    private void MoveToCenter() {
+        float deltaSpeed = Time.deltaTime * bossSpeed;
+        if (transform.position != centerPos && bigLaserWarmingUp) {
+            transform.position = Vector3.MoveTowards(transform.position, centerPos, deltaSpeed);
+        }
+        else {
+            bigLaserWarmingUp = false;
+            intoPositionForLaser = true;
+            JudgementFight judgementFight = FindObjectOfType<JudgementFight>();
+            judgementFight.StartBigLaser();
         }
     }
 
@@ -120,5 +161,14 @@ public class BossFight : MonoBehaviour {
         Destroy(gameObject);
         EnemySpawner spawner = FindObjectOfType<EnemySpawner>();
         spawner.BossDead();
+    }
+
+    public enum BossType {
+        Tornado,
+        Judgment,
+        Mother,
+        SpaceBrain,
+        GunLord,
+        SkullPlate
     }
 }

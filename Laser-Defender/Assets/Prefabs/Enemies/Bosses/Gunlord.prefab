@@ -95,11 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e758e623d32c94f4bb802f7d4a7d0b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossName: 0
   bossSpeed: 2
   startingPoint: {x: 0, y: 3, z: 0}
   path: {fileID: 3563551495461721868, guid: 319ceb56e65e1fd4eb4b38ae2b842d16, type: 3}
   powerUps: []
+  explosionPattern: {fileID: 0}
+  type: 4
 --- !u!114 &6622551311055520852
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -114,10 +114,10 @@ MonoBehaviour:
   shieldScale: {x: 2, y: 2, z: 0}
   shootrandomRangeMin: 0.5
   shootRandomRange: 2.5
-  enemyProjectile: {fileID: 979847751105616194, guid: 733229e80cc5c684394b2c8be21b5637,
+  enemyProjectile: {fileID: 979847751105616194, guid: dfc3bc6f14817f340a6692aa9865c7c3,
     type: 3}
   projectileSpeed: 3
-  projectileQuantity: 1
+  projectileQuantity: 2
   homingShot: 0
   addedDamage: 0
   explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,

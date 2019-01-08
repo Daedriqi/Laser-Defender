@@ -26,11 +26,11 @@ public class Game : MonoBehaviour {
 
     [Header("Other")]
     [SerializeField] GameState state = GameState.Playing;
-    [Range(0f, 10f)] [SerializeField] float gameSpeed = 1;
+    [Range(0f, 25f)] [SerializeField] float gameSpeed = 1;
     [SerializeField] int enemyHealthScaling = 1;
-    [Range(0, 5)][SerializeField] int startLevelIndex = 0;
 
     //cache references
+    int startLevelIndex = 0;
     int score;
     int levelIndex;
     int maxHealthScaler = 25;
