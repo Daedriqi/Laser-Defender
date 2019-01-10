@@ -19,23 +19,24 @@ public class Game : MonoBehaviour {
     [SerializeField] GameObject healthBarUIObject;
     [SerializeField] GameObject playButton;
     [SerializeField] TextMeshProUGUI playButtonText;
-    [SerializeField] GameObject settingsButton;
     [SerializeField] GameObject quitButton;
     [SerializeField] TextMeshProUGUI scoreboard;
     [SerializeField] TextMeshProUGUI statusText;
+    [SerializeField] TextMeshProUGUI controlsText;
 
     [Header("Other")]
-    [SerializeField] GameState state = GameState.Playing;
     [Range(0f, 25f)] [SerializeField] float gameSpeed = 1;
-    [SerializeField] int enemyHealthScaling = 1;
 
     //cache references
+    int enemyHealthScaling = 1;
     int startLevelIndex = 0;
     int score;
     int levelIndex;
     int maxHealthScaler = 25;
     int currentHealthScaling = 0;
     bool bossFight = false;
+    GameState state = GameState.Playing;
+
     PlayerShip playerShip;
     BigBombUI bigBombUI;
     HealthBarUI healthBarUI;
@@ -129,12 +130,10 @@ public class Game : MonoBehaviour {
     private void ButtonsShowHide(bool showButtons) {
         if (showButtons) {
             playButton.SetActive(true);
-            settingsButton.SetActive(true);
             quitButton.SetActive(true);
         }
         else {
             playButton.SetActive(false);
-            settingsButton.SetActive(false);
             quitButton.SetActive(false);
         }
     }
@@ -163,7 +162,6 @@ public class Game : MonoBehaviour {
         SetTimeScale(0);
         quitButton.SetActive(true);
         playButton.SetActive(true);
-        settingsButton.SetActive(true);
         playButtonText.text = "Try Again";
         statusText.text = "Game Over";
         audioSource.Stop();
@@ -198,7 +196,7 @@ public class Game : MonoBehaviour {
         healthBarUI.UpdateShieldBar(300);
         quitButton.SetActive(false);
         playButton.SetActive(false);
-        settingsButton.SetActive(false);
+        controlsText.text = "";
         audioSource.Stop();
         audioSource.clip = gameMusic;
         audioSource.Play();
