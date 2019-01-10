@@ -272,13 +272,14 @@ public class PlayerShip : MonoBehaviour {
     public IEnumerator DamagePlayer(int damage) {
         UpdatePlayerHealth(-damage);
         StartCoroutine(flashSprite());
-        if (numberOfBullets > defaultBulletQuantity) {
+        int rand = UnityEngine.Random.Range(1, 4);
+        if (rand == 1 && numberOfBullets > defaultBulletQuantity) {
             numberOfBullets -= 1;
         }
-        if (currentBulletPowerIndex > 0) {
+        if (rand == 2 && currentBulletPowerIndex > 0) {
             currentBulletPowerIndex--;
         }
-        if (currentShootDelay < defaultShootDelay) {
+        if (rand == 3 && currentShootDelay < defaultShootDelay) {
             currentShootDelay += 0.05f;
         }
         if (currentHealthLeft <= 0) {

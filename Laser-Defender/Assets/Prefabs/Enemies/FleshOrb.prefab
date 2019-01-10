@@ -100,14 +100,14 @@ MonoBehaviour:
   specialtyTypeEnemy: 1
   isBoss: 0
   shieldScale: {x: 1.25, y: 1.25, z: 0}
-  shootrandomRangeMin: 4
+  shootrandomRangeMin: 1
   shootRandomRange: 5
   enemyProjectile: {fileID: 979847751105616194, guid: e23b8f3e4bf315c438446210710a74c1,
     type: 3}
   projectileSpeed: 4
   projectileQuantity: 1
   homingShot: 0
-  addedDamage: 50
+  addedDamage: 35
   explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
 --- !u!58 &7830412924541256884

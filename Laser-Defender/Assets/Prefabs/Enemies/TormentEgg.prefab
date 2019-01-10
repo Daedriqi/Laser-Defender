@@ -95,19 +95,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45d2065aac0e2a40b588f74f226b1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 500
+  enemyHealth: 650
   points: 300
   specialtyTypeEnemy: 1
   isBoss: 0
   shieldScale: {x: 2, y: 2, z: 0}
-  shootrandomRangeMin: 2
-  shootRandomRange: 3
+  shootrandomRangeMin: 1
+  shootRandomRange: 4
   enemyProjectile: {fileID: 979847751105616194, guid: bb52bb71c7f8fef4d9154dce72d6595a,
     type: 3}
   projectileSpeed: 4
   projectileQuantity: 1
   homingShot: 0
-  addedDamage: 100
+  addedDamage: 50
   explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
 --- !u!114 &8783522860568847664

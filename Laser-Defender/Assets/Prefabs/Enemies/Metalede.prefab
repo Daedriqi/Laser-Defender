@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45d2065aac0e2a40b588f74f226b1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 8
+  enemyHealth: 150
   points: 135
   specialtyTypeEnemy: 0
   isBoss: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   projectileSpeed: 5
   projectileQuantity: 1
   homingShot: 0
-  addedDamage: 0
+  addedDamage: 25
   explosionVFX: {fileID: 3957901263131184431, guid: 51a68203af5632e4ca55c51981f7eca4,
     type: 3}
 --- !u!58 &7830412924541256884
@@ -150,6 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb60b2993f9a91488bd65fe80f79604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 50
   shootSound: {fileID: 0}
   shootVolume: 0
