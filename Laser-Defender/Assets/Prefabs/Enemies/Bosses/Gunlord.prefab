@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45d2065aac0e2a40b588f74f226b1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 27500
+  enemyHealth: 22500
   points: 175000
   specialtyTypeEnemy: 0
   isBoss: 1
